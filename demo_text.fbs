@@ -1,0 +1,20 @@
+@ITEM SWORD
+
+START >>
+- FOO.strength <- 10
+- FOO.takeable <- false
+- FOO.name <- "Magic Sword"
+
+TAKE >>
+? FOO.takeable is false
+  - FOO.takeable <- true
+  ? FOO.strength > 10
+    - FOO.strength <- 3
+  x
+  - FOO.baz <- "bar"
+x
+
+LOOK >>
+- ((
+  This is text. {? FOO.takeable is true} butt{butt}. {x}
+))

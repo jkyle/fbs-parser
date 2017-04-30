@@ -1,0 +1,27 @@
+#ITEM LIGHT SWITCH
+
+PROPERTIES >>
+takeable <- false
+position <- "off"
+
+USE >>
+? ARENA.attendance === 1
+  - ARENA.attendance <- ARENA.attendance + 1
+  ? <SPACE STATION> has <LASER BEAM>
+    - <SPACE STATION> remove <LASER BEAM>
+    - $INVENTORY add <LASER BEAM>
+  x
+  - SAY Oh no. What have we done.
+x
+
+TAKE >>
+? $THIS.takeable !== true
+  - SAY You cannot take this.
+x
+
+LOOK >>
+- SAY ((
+   This lightswitch is currently
+    {? $THIS.position === "on"} on {x}
+    {? $THIS.position === "off"} off {x}.
+  ))
