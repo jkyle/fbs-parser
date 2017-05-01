@@ -23,3 +23,4 @@ gte -> (">=" | "gte" | "GTE")
 	{% d => ">=" %}
 has -> ("has" | "HAS" | "contains" | "CONTAINS" | "includes" | "INCLUDES")
 	{% d => "has" %}
+lacks -> ("lacks" | "LACKS")

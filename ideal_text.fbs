@@ -1,27 +1,34 @@
-@ITEM LIGHT SWITCH
+@ITEM SWORD
 
-PROPERTIES >>
-takeable <- false
-position <- "off"
-
-USE >>
-? ARENA.attendance === 1
-  - ARENA.attendance <- 23
-  ? <SPACE STATION> has <LASER BEAM>
-    - <SPACE STATION> remove <LASER BEAM>
-    - $INVENTORY add <LASER BEAM>
-  x
-  - ((Oh no. What have we done.))
-x
+START >>
+- SWORD.strength <- 10
+- SWORD.takeable <- false
+- SWORD.name <- "Magic Sword"
 
 TAKE >>
-? $THIS.takeable !== true
-  - SAY You cannot take this.
+? SWORD.takeable is false
+  - ((No you don't. The sword is stuck.))
+x
+? SWORD.takeable is true
+  - $LOCATION remove SWORD
+  - $INVENTORY add SWORD
+  - (( With a strong yank you pull the
+       sword from the stone.
+    ))
+x
+
+USE >>
+? $INVENTORY has SWORD
+  - ((You swing the sword.))
 x
 
 LOOK >>
-- SAY ((
-   This lightswitch is currently
-    {? $THIS.position === "on"} on {x}
-    {? $THIS.position === "off"} off {x}.
+? $INVENTORY has SWORD
+x
+
+? $INVENTORY lacks SWORD
+  - ((
+    The sword gleams in the sunlight.
+    {? $THIS.takeable is false} It seems to be stuck in the stone.{x}
   ))
+x
