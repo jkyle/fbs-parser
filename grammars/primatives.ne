@@ -3,6 +3,11 @@ primative -> (string | number | boolean) {% d => d[0][0] %}
 # string
 string -> quote safechar:+ quote {% d => d[1].join('') %}
 
+safechar_no_ws -> quote       {% d => "\\" + d[0] %}
+      	  | tick        {% id %}
+		      | alpha       {% id %}
+		      | punctuation {% id %}
+
 safechar -> quote       {% d => "\\" + d[0] %}
       	  | tick        {% id %}
 		      | alpha       {% id %}
@@ -12,7 +17,7 @@ safechar -> quote       {% d => "\\" + d[0] %}
 quote -> "\"" {% id %}
 tick -> "'" {% id %}
 alpha -> [a-zA-Z0-9] {% id %}
-punctuation -> [.?!,$%*#(){}[\]] {% id %}
+punctuation -> [.?!,$%*#()[\]] {% id %}
 ws -> " "
 # number
 number -> integer {% id %}

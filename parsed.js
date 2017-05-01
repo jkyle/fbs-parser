@@ -9,7 +9,7 @@ module.exports = {
           "type": "set",
           "target": {
             "type": "GAME_OBJECT",
-            "id": "FOO",
+            "id": "SWORD",
             "props": [
               "strength"
             ]
@@ -20,7 +20,7 @@ module.exports = {
           "type": "set",
           "target": {
             "type": "GAME_OBJECT",
-            "id": "FOO",
+            "id": "SWORD",
             "props": [
               "takeable"
             ]
@@ -31,7 +31,7 @@ module.exports = {
           "type": "set",
           "target": {
             "type": "GAME_OBJECT",
-            "id": "FOO",
+            "id": "SWORD",
             "props": [
               "name"
             ]
@@ -48,7 +48,7 @@ module.exports = {
           "condition": {
             "left": {
               "type": "GAME_OBJECT",
-              "id": "FOO",
+              "id": "SWORD",
               "props": [
                 "takeable"
               ]
@@ -58,53 +58,26 @@ module.exports = {
           },
           "actions": [
             {
-              "type": "set",
-              "target": {
-                "type": "GAME_OBJECT",
-                "id": "FOO",
-                "props": [
-                  "takeable"
-                ]
-              },
-              "value": true
-            },
-            {
-              "type": "condition",
-              "condition": {
-                "left": {
-                  "type": "GAME_OBJECT",
-                  "id": "FOO",
-                  "props": [
-                    "strength"
-                  ]
-                },
-                "operator": ">",
-                "right": 10
-              },
-              "actions": [
-                {
-                  "type": "set",
-                  "target": {
-                    "type": "GAME_OBJECT",
-                    "id": "FOO",
-                    "props": [
-                      "strength"
+              "type": "say",
+              "passage": {
+                "paragraphs": [
+                  {
+                    "lines": [
+                      {
+                        "tokens": [
+                          "No",
+                          "you",
+                          "don't.",
+                          "The",
+                          "sword",
+                          "is",
+                          "stuck."
+                        ]
+                      }
                     ]
-                  },
-                  "value": 3
-                }
-              ]
-            },
-            {
-              "type": "set",
-              "target": {
-                "type": "GAME_OBJECT",
-                "id": "FOO",
-                "props": [
-                  "baz"
+                  }
                 ]
-              },
-              "value": "bar"
+              }
             }
           ]
         }
@@ -121,20 +94,28 @@ module.exports = {
                 "lines": [
                   {
                     "tokens": [
-                      "This",
-                      "is text.",
+                      "The",
+                      "sword",
+                      "gleams",
+                      "in",
+                      "the",
+                      "sunlight."
+                    ]
+                  },
+                  {
+                    "tokens": [
                       {
                         "type": "condition",
                         "condition": {
                           "left": {
                             "type": "GAME_OBJECT",
-                            "id": "FOO",
+                            "id": "SWORD",
                             "props": [
                               "takeable"
                             ]
                           },
                           "operator": "===",
-                          "right": true
+                          "right": false
                         },
                         "passage": {
                           "paragraphs": [
@@ -142,7 +123,14 @@ module.exports = {
                               "lines": [
                                 {
                                   "tokens": [
-                                    "butt{butt}. "
+                                    "It",
+                                    "seems",
+                                    "to",
+                                    "be",
+                                    "stuck",
+                                    "in",
+                                    "the",
+                                    "stone."
                                   ]
                                 }
                               ]

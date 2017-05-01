@@ -8,8 +8,8 @@
 action -> "-" _ game_object _ operator _ primative
 	{% d => ({type: d[4], target: d[2], value: d[6]}) %}
 
-action -> "-" _ ("SAY"|"say"):? __ "((" "\n":* passage "\n":* "))"
-	{% d =>  ({type: "say", passage: d[6]}) %}
+action -> "-" _ ("SAY"|"say"):? __ "((" passage "))"
+	{% d =>  ({type: "say", passage: d[5]}) %}
 
 #operators
 operator -> (add | remove | set) {% d => d[0][0] %}

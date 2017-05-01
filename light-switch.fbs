@@ -1,0 +1,13 @@
+@ITEM LIGHT SWITCH
+
+LOOK >>
+- <LIGHT SWITCH>.position <- "on"
+? FOO.bar is "baz"
+  - ((
+      Hello world. This is a
+      block of text.
+
+      {? <LIGHT SWTICH.position is "on"} It is on!{x}
+      {? <LIGHT SWTICH.position is "off"} It is off!{x}
+    ))
+x

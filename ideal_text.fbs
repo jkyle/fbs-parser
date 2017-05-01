@@ -1,4 +1,4 @@
-#ITEM LIGHT SWITCH
+@ITEM LIGHT SWITCH
 
 PROPERTIES >>
 takeable <- false
@@ -6,12 +6,12 @@ position <- "off"
 
 USE >>
 ? ARENA.attendance === 1
-  - ARENA.attendance <- ARENA.attendance + 1
+  - ARENA.attendance <- 23
   ? <SPACE STATION> has <LASER BEAM>
     - <SPACE STATION> remove <LASER BEAM>
     - $INVENTORY add <LASER BEAM>
   x
-  - SAY Oh no. What have we done.
+  - ((Oh no. What have we done.))
 x
 
 TAKE >>

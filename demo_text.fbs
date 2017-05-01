@@ -1,20 +1,17 @@
 @ITEM SWORD
 
 START >>
-- FOO.strength <- 10
-- FOO.takeable <- false
-- FOO.name <- "Magic Sword"
+- SWORD.strength <- 10
+- SWORD.takeable <- false
+- SWORD.name <- "Magic Sword"
 
 TAKE >>
-? FOO.takeable is false
-  - FOO.takeable <- true
-  ? FOO.strength > 10
-    - FOO.strength <- 3
-  x
-  - FOO.baz <- "bar"
+? SWORD.takeable is false
+  - ((No you don't. The sword is stuck.))
 x
 
 LOOK >>
 - ((
-  This is text. {? FOO.takeable is true} butt{butt}. {x}
+  The sword gleams in the sunlight.
+  {? SWORD.takeable is false} It seems to be stuck in the stone.{x}
 ))
