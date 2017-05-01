@@ -1,7 +1,7 @@
 @include "./events.ne"
 
 file -> fileType " " fileName ("\n"):+ events ("\n"):*
-    {% d => ({ type: d[0], name: d[2], events: d[4] }) %}
+    {% d => ({ type: d[0], id: d[2], events: d[4] }) %}
 
 fileType -> "@" ("ITEM" | "LOCATION" | "CHARACTER" | "PLAYER" | "GLOBAL")
 	{% d => d[1][0] %}

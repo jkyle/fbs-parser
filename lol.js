@@ -1,6 +1,6 @@
 module.exports = {
   "type": "ITEM",
-  "name": "SWORD",
+  "id": "SWORD",
   "events": [
     {
       "method": "START",
@@ -9,7 +9,7 @@ module.exports = {
           "type": "set",
           "target": {
             "type": "GAME_OBJECT",
-            "name": "FOO",
+            "id": "FOO",
             "props": [
               "strength"
             ]
@@ -20,7 +20,7 @@ module.exports = {
           "type": "set",
           "target": {
             "type": "GAME_OBJECT",
-            "name": "FOO",
+            "id": "FOO",
             "props": [
               "takeable"
             ]
@@ -31,7 +31,7 @@ module.exports = {
           "type": "set",
           "target": {
             "type": "GAME_OBJECT",
-            "name": "FOO",
+            "id": "FOO",
             "props": [
               "name"
             ]
@@ -48,7 +48,7 @@ module.exports = {
           "condition": {
             "left": {
               "type": "GAME_OBJECT",
-              "name": "FOO",
+              "id": "FOO",
               "props": [
                 "takeable"
               ]
@@ -61,7 +61,7 @@ module.exports = {
               "type": "set",
               "target": {
                 "type": "GAME_OBJECT",
-                "name": "FOO",
+                "id": "FOO",
                 "props": [
                   "takeable"
                 ]
@@ -73,7 +73,7 @@ module.exports = {
               "condition": {
                 "left": {
                   "type": "GAME_OBJECT",
-                  "name": "FOO",
+                  "id": "FOO",
                   "props": [
                     "strength"
                   ]
@@ -86,7 +86,7 @@ module.exports = {
                   "type": "set",
                   "target": {
                     "type": "GAME_OBJECT",
-                    "name": "FOO",
+                    "id": "FOO",
                     "props": [
                       "strength"
                     ]
@@ -99,7 +99,7 @@ module.exports = {
               "type": "set",
               "target": {
                 "type": "GAME_OBJECT",
-                "name": "FOO",
+                "id": "FOO",
                 "props": [
                   "baz"
                 ]
@@ -128,7 +128,7 @@ module.exports = {
                         "condition": {
                           "left": {
                             "type": "GAME_OBJECT",
-                            "name": "FOO",
+                            "id": "FOO",
                             "props": [
                               "takeable"
                             ]

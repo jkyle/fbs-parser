@@ -1,5 +1,6 @@
 import { setProperty } from './properties'
 import parsePassage from './text'
+import evaluateCondition from './conditionals'
 
 const processSet = action => {
   const setFn = setProperty(action.target.id, action.target.props, action.value)
@@ -11,9 +12,16 @@ const processSay = action => {
   return game => ({...game, buffer: [sayFn(game), ...game.buffer]})
 }
 
+const processCondition = action => {
+  const conditionFn = evaluateCondition(action.condition)
+  const actions = processActions(action.actions)
+  return game => conditionFn(game) ? actions.reduce((acc, actionFn) => actionFn(acc), game) : game
+}
+
 const actions = {
   set: processSet,
-  say: processSay
+  say: processSay,
+  condition: processCondition
 }
 
 
@@ -22,7 +30,11 @@ const processAction = action => {
   return game => actionFn(game)
 }
 
+const processActions = actions => {
+  return actions.map(processAction)
+}
+
 module.exports = event => {
-  const actions = event.actions.map(processAction)
+  const actions = processActions(event.actions)
   return game => actions.reduce((acc, actionFn) => actionFn(acc), game)
 }
