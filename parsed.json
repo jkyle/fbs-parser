@@ -65,13 +65,7 @@
                     "lines": [
                       {
                         "tokens": [
-                          "No",
-                          "you",
-                          "don't.",
-                          "The",
-                          "sword",
-                          "is",
-                          "stuck."
+                          "No you don't. The sword is stuck."
                         ]
                       }
                     ]
@@ -104,9 +98,8 @@
                     "lines": [
                       {
                         "tokens": [
-                          "You",
-                          "already",
-                          "have",
+                          "You already have",
+                          " ",
                           {
                             "type": "GAME_OBJECT",
                             "id": "SWORD",
@@ -114,17 +107,13 @@
                               "name"
                             ]
                           },
-                          "in",
-                          "your",
-                          "possession."
+                          "",
+                          "."
                         ]
                       },
                       {
                         "tokens": [
-                          "Do",
-                          "you",
-                          "need",
-                          "another?"
+                          "Do you need another?"
                         ]
                       }
                     ]
@@ -147,12 +136,19 @@
                 "lines": [
                   {
                     "tokens": [
-                      "The",
-                      "sword",
-                      "gleams",
-                      "in",
-                      "the",
-                      "sunlight.",
+                      {
+                        "type": "GAME_OBJECT",
+                        "id": "SWORD",
+                        "props": [
+                          "name"
+                        ]
+                      },
+                      " ",
+                      "gleams in the sunlight."
+                    ]
+                  },
+                  {
+                    "tokens": [
                       {
                         "type": "condition",
                         "condition": {
@@ -172,14 +168,7 @@
                               "lines": [
                                 {
                                   "tokens": [
-                                    "It",
-                                    "seems",
-                                    "to",
-                                    "be",
-                                    "stuck",
-                                    "in",
-                                    "the",
-                                    "stone."
+                                    "It seems to be stuck in the stone."
                                   ]
                                 }
                               ]

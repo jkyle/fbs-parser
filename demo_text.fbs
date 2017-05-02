@@ -10,11 +10,12 @@ TAKE >>
   - ((No you don't. The sword is stuck.))
 x
 ? $INVENTORY has SWORD
-  - ((You already have {@ SWORD.name } in your possession.
+  - ((You already have {@ SWORD.name }.
     Do you need another?))
 x
 
 LOOK >>
 - ((
-  The sword gleams in the sunlight. {? SWORD.takeable is false} It seems to be stuck in the stone. {x}
+  {@ SWORD.name } gleams in the sunlight.
+  {? SWORD.takeable is false} It seems to be stuck in the stone. {x}
 ))

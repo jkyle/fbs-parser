@@ -19,7 +19,7 @@ const game = {
   buffer: []
 }
 
-const actions = [game.objects.SWORD.START, game.objects.SWORD.TAKE]
+const actions = [game.objects.SWORD.START, game.objects.SWORD.TAKE, game.objects.SWORD.LOOK]
 const t1 = process.hrtime();
 const result = actions.reduce((acc, fn) => fn(acc), game)
 const t2 = process.hrtime(t1);

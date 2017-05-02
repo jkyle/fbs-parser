@@ -47,7 +47,7 @@ const parseLine = line => {
   const tokens = line.tokens.map(parseToken)
 
   return game => {
-    return tokens.map(t => t(game)).join(' ')
+    return tokens.map(t => t(game)).join('')
   }
 };
 

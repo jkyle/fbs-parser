@@ -42,4 +42,4 @@ boolean -> "true"   {% d => true %}
 
 # whitespace
 _ -> [ ]:+  {% null %}
-__ -> [ ]:* {% null %}
+__ -> [ ]:* {% d => d[0].length ? ' ' : '' %}
