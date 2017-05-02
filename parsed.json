@@ -1,4 +1,4 @@
-module.exports = {
+{
   "type": "ITEM",
   "id": "SWORD",
   "events": [
@@ -80,6 +80,59 @@ module.exports = {
               }
             }
           ]
+        },
+        {
+          "type": "condition",
+          "condition": {
+            "left": {
+              "type": "INVENTORY",
+              "props": []
+            },
+            "operator": "has",
+            "right": {
+              "type": "GAME_OBJECT",
+              "id": "SWORD",
+              "props": []
+            }
+          },
+          "actions": [
+            {
+              "type": "say",
+              "passage": {
+                "paragraphs": [
+                  {
+                    "lines": [
+                      {
+                        "tokens": [
+                          "You",
+                          "already",
+                          "have",
+                          {
+                            "type": "GAME_OBJECT",
+                            "id": "SWORD",
+                            "props": [
+                              "name"
+                            ]
+                          },
+                          "in",
+                          "your",
+                          "possession."
+                        ]
+                      },
+                      {
+                        "tokens": [
+                          "Do",
+                          "you",
+                          "need",
+                          "another?"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -99,11 +152,7 @@ module.exports = {
                       "gleams",
                       "in",
                       "the",
-                      "sunlight."
-                    ]
-                  },
-                  {
-                    "tokens": [
+                      "sunlight.",
                       {
                         "type": "condition",
                         "condition": {

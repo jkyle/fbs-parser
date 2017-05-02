@@ -11,10 +11,18 @@ const setPropertyForObject = (object, [prop, ...rest], value) => {
   return {...object, [prop]: setPropertyForObject(object[prop] || {}, rest, value) }
 }
 
-
+const getPropsArray = (id, props, getItems) =>
+  props.length > 0 ? ['objects', id, 'properties', ...props] :
+  getItems         ? ['objects', id, 'items']                :
+                     ['objects', id, 'id']
 module.exports = {
-  getProperty: (objectId, propertyArr) => game =>
-    getPropertyFromObject(game, ['objects', objectId, 'properties', ...propertyArr]),
+  getProperty: ({type, id, props}, getItems) => game => {
+    const objectLocation = type === 'GAME_OBJECT' ? getPropsArray(id, props, getItems)            :
+                           type === 'INVENTORY'   ? getPropsArray('PLAYER', [], true)             :
+                           type === 'LOCATION'    ? getPropsArray(game.location, props, getItems) :
+                           []
+    return getPropertyFromObject(game, objectLocation)
+  },
   setProperty: (objectId, propertyArr, value) => game =>
     setPropertyForObject(game, ['objects', objectId, 'properties', ...propertyArr], value)
 }

@@ -2,8 +2,11 @@
 @include "./primatives.ne"
 
 # Conditional
-condition -> game_object _ comparator _ primative
+condition -> left _ comparator _ right
 	{% d => ({ left: d[0], operator: d[2], right: d[4] }) %}
+
+left -> game_object 							 {% id %}
+right -> (primative | game_object) {% d => d[0][0] %}
 
 # Comparators
 comparator -> (eq | ne | lt | lte | gt | gte | has)

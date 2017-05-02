@@ -24,6 +24,7 @@ x
 
 LOOK >>
 ? $INVENTORY has SWORD
+  - ((That's one good looking sword.))
 x
 
 ? $INVENTORY lacks SWORD

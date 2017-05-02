@@ -10,7 +10,7 @@ const getValue = (item) => {
   if(typeof item !== 'object') {
     return game => item.value
   }
-  return getProperty(item.id, item.props)
+  return getProperty(item)
 }
 
 const conditionToken = token => {
@@ -27,7 +27,7 @@ const conditionToken = token => {
 };
 
 const propertyToken = token => {
-  const access = getProperty(token.id, token.props)
+  const access = getProperty(token)
   return game => access(game)
 };
 
@@ -37,8 +37,8 @@ const parseToken = token => {
   } else if (token.type === 'condition') {
     const stringFn = conditionToken(token);
     return game => stringFn(game)
-  } else if (token.type === 'property') {
-    const stringFn = conditionToken(token);
+  } else if (token.type === 'GAME_OBJECT') {
+    const stringFn = getProperty(token);
     return game => stringFn(game)
   }
 };

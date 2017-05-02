@@ -4,17 +4,23 @@ primative -> (string | number | boolean) {% d => d[0][0] %}
 string -> quote safechar:+ quote {% d => d[1].join('') %}
 
 safechar_no_ws -> quote       {% d => "\\" + d[0] %}
-      	  | tick        {% id %}
-		      | alpha       {% id %}
-		      | punctuation {% id %}
+            	  | tick        {% id %}
+      		      | alpha       {% id %}
+      		      | punctuation {% id %}
+                | lbrace      {% id %}
+                | rbrace      {% id %}
 
 safechar -> quote       {% d => "\\" + d[0] %}
       	  | tick        {% id %}
 		      | alpha       {% id %}
 		      | ws          {% id %}
 		      | punctuation {% id %}
+          | lbrace      {% id %}
+          | rbrace      {% id %}
 
 quote -> "\"" {% id %}
+lbrace -> "\\{" {% d => '\{' %}
+rbrace -> "\\}" {% d => '\}' %}
 tick -> "'" {% id %}
 alpha -> [a-zA-Z0-9] {% id %}
 punctuation -> [.?!,$%*#()[\]] {% id %}
