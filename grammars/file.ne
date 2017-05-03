@@ -1,5 +1,8 @@
 @include "./events.ne"
 
+files -> file:+
+    {% id %}
+
 file -> fileType " " fileName ("\n"):+ events ("\n"):*
     {% d => ({ type: d[0], id: d[2], events: d[4] }) %}
 

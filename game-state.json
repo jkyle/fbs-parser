@@ -1,0 +1,11 @@
+{
+  "buffer": [],
+  "objects": {
+    "SWORD": {
+      "id": "SWORD",
+      "type": "ITEM",
+      "properties": {},
+      "items": []
+    }
+  }
+}

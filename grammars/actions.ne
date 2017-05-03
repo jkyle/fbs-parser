@@ -11,6 +11,9 @@ action -> "-" _ game_object _ operator _ primative
 action -> "-" _ ("SAY"|"say"):? __ "((" passage "))"
 	{% d =>  ({type: "say", passage: d[5]}) %}
 
+game_object_or_primative -> game_object {% id %}
+													| primative {% id %}
+
 #operators
 operator -> (add | remove | set) {% d => d[0][0] %}
 add -> "add" {% id %}

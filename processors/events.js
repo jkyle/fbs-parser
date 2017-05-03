@@ -1,9 +1,9 @@
-import { setProperty } from './properties'
+import { getProperty, setProperty, addItem } from './properties'
 import parsePassage from './text'
 import evaluateCondition from './conditionals'
 
 const processSet = action => {
-  const setFn = setProperty(action.target.id, action.target.props, action.value)
+  const setFn = setProperty(action)
   return game => setFn(game)
 }
 
@@ -18,10 +18,18 @@ const processCondition = action => {
   return game => conditionFn(game) ? actions.reduce((acc, actionFn) => actionFn(acc), game) : game
 }
 
+const processAdd = action => {
+  const addFn = addItem(action.target.id, action.value.id)
+  return game => addFn(game)
+}
+// const processRemove = action =>
+
 const actions = {
   set: processSet,
   say: processSay,
-  condition: processCondition
+  condition: processCondition,
+  add: processAdd,
+  // remove: processRemove
 }
 
 

@@ -223,6 +223,8 @@ var grammar = {
     {"name": "action$string$1", "symbols": [{"literal":"("}, {"literal":"("}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "action$string$2", "symbols": [{"literal":")"}, {"literal":")"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "action", "symbols": [{"literal":"-"}, "_", "action$ebnf$1", "__", "action$string$1", "passage", "action$string$2"], "postprocess": d =>  ({type: "say", passage: d[5]})},
+    {"name": "game_object_or_primative", "symbols": ["game_object"], "postprocess": id},
+    {"name": "game_object_or_primative", "symbols": ["primative"], "postprocess": id},
     {"name": "operator$subexpression$1", "symbols": ["add"]},
     {"name": "operator$subexpression$1", "symbols": ["remove"]},
     {"name": "operator$subexpression$1", "symbols": ["set"]},
@@ -252,6 +254,9 @@ var grammar = {
     {"name": "doable$subexpression$1", "symbols": ["action"]},
     {"name": "doable$subexpression$1", "symbols": ["condition_block"]},
     {"name": "doable", "symbols": ["doable$subexpression$1"], "postprocess": d => d[0][0]},
+    {"name": "files$ebnf$1", "symbols": ["file"]},
+    {"name": "files$ebnf$1", "symbols": ["files$ebnf$1", "file"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "files", "symbols": ["files$ebnf$1"], "postprocess": id},
     {"name": "file$ebnf$1$subexpression$1", "symbols": [{"literal":"\n"}]},
     {"name": "file$ebnf$1", "symbols": ["file$ebnf$1$subexpression$1"]},
     {"name": "file$ebnf$1$subexpression$2", "symbols": [{"literal":"\n"}]},
@@ -286,7 +291,7 @@ var grammar = {
     {"name": "events$ebnf$1", "symbols": ["events$ebnf$1", "events$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "events", "symbols": ["event_block", "events$ebnf$1"], "postprocess": d => [d[0], ...d[1].map(e => e[2])]}
 ]
-  , ParserStart: "file"
+  , ParserStart: "files"
 }
 if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
    module.exports = grammar;

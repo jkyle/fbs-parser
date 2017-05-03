@@ -1,20 +1,18 @@
 {
-  "type": "LOCATION",
-  "id": "ARENA",
-  "events": [
+  "SWORD": [
     {
-      "method": "START",
+      "method": "SWORD",
       "actions": [
         {
           "type": "set",
           "target": {
             "type": "GAME_OBJECT",
-            "id": "ARENA",
+            "id": "SWORD",
             "props": [
-              "capacity"
+              "name"
             ]
           },
-          "value": 100
+          "value": "Magic"
         }
       ]
     }
