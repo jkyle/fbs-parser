@@ -6,6 +6,7 @@ const comparators = {
   '<': (left, right) => left < right,
   '>=': (left, right) => left >= right,
   '<=': (left, right) => left <= right,
+  '!==': (left, right) => left !== right,
   has: (left, right) => (left.indexOf(right) > -1),
   lacks: (left, right) => left.indexOf(right) < 0
 }
@@ -26,7 +27,7 @@ const evaluateCondition = condition => {
     left = getValue(condition.left)
   }
   right = getValue(condition.right)
-  return game => comparators[operator](left(game), right(game))
+  return (game, thisObj, targetObj) => comparators[operator](left(game, thisObj, targetObj), right(game, thisObj, targetObj))
 }
 
 module.exports = evaluateCondition

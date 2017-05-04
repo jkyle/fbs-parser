@@ -1,4 +1,213 @@
 {
+  "DEFAULT": [
+    {
+      "method": "TAKE",
+      "actions": [
+        {
+          "type": "condition",
+          "condition": {
+            "left": {
+              "type": "THIS",
+              "props": [
+                "takeable"
+              ]
+            },
+            "operator": "===",
+            "right": true
+          },
+          "actions": [
+            {
+              "type": "condition",
+              "condition": {
+                "left": {
+                  "type": "LOCATION",
+                  "props": []
+                },
+                "operator": "has",
+                "right": {
+                  "type": "THIS",
+                  "props": []
+                }
+              },
+              "actions": [
+                {
+                  "type": "add",
+                  "target": {
+                    "type": "INVENTORY",
+                    "props": []
+                  },
+                  "value": {
+                    "type": "THIS",
+                    "props": []
+                  }
+                },
+                {
+                  "type": "remove",
+                  "target": {
+                    "type": "LOCATION",
+                    "props": []
+                  },
+                  "value": {
+                    "type": "THIS",
+                    "props": []
+                  }
+                },
+                {
+                  "type": "say",
+                  "passage": {
+                    "paragraphs": [
+                      {
+                        "lines": [
+                          {
+                            "tokens": [
+                              "You take",
+                              " ",
+                              {
+                                "type": "THIS",
+                                "props": []
+                              },
+                              "",
+                              "."
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "condition",
+              "condition": {
+                "left": {
+                  "type": "LOCATION",
+                  "props": []
+                },
+                "operator": "lacks",
+                "right": {
+                  "type": "THIS",
+                  "props": []
+                }
+              },
+              "actions": [
+                {
+                  "type": "say",
+                  "passage": {
+                    "paragraphs": [
+                      {
+                        "lines": [
+                          {
+                            "tokens": [
+                              "You can't do that."
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "condition": {
+            "left": {
+              "type": "THIS",
+              "props": [
+                "takeable"
+              ]
+            },
+            "operator": "===",
+            "right": false
+          },
+          "actions": [
+            {
+              "type": "say",
+              "passage": {
+                "paragraphs": [
+                  {
+                    "lines": [
+                      {
+                        "tokens": [
+                          "You can't take that."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "SWORD": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "set",
+          "target": {
+            "type": "THIS",
+            "props": [
+              "name"
+            ]
+          },
+          "value": "Magic"
+        }
+      ]
+    },
+    {
+      "method": "TAKE",
+      "actions": [
+        {
+          "type": "condition",
+          "condition": {
+            "left": {
+              "type": "GAME_OBJECT",
+              "id": "SWORD",
+              "props": [
+                "name"
+              ]
+            },
+            "operator": "===",
+            "right": "Sadnees"
+          },
+          "actions": [
+            {
+              "type": "remove",
+              "target": {
+                "type": "GAME_OBJECT",
+                "id": "ARENA",
+                "props": []
+              },
+              "value": {
+                "type": "GAME_OBJECT",
+                "id": "SWORD",
+                "props": []
+              }
+            },
+            {
+              "type": "add",
+              "target": {
+                "type": "INVENTORY",
+                "props": []
+              },
+              "value": {
+                "type": "GAME_OBJECT",
+                "id": "SWORD",
+                "props": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "ARENA": [
     {
       "method": "START",
@@ -100,54 +309,6 @@
                 ]
               }
             ]
-          }
-        }
-      ]
-    }
-  ],
-  "SWORD": [
-    {
-      "method": "START",
-      "actions": [
-        {
-          "type": "set",
-          "target": {
-            "type": "GAME_OBJECT",
-            "id": "SWORD",
-            "props": [
-              "name"
-            ]
-          },
-          "value": "Magic"
-        }
-      ]
-    },
-    {
-      "method": "TAKE",
-      "actions": [
-        {
-          "type": "remove",
-          "target": {
-            "type": "GAME_OBJECT",
-            "id": "ARENA",
-            "props": []
-          },
-          "value": {
-            "type": "GAME_OBJECT",
-            "id": "SWORD",
-            "props": []
-          }
-        },
-        {
-          "type": "add",
-          "target": {
-            "type": "INVENTORY",
-            "props": []
-          },
-          "value": {
-            "type": "GAME_OBJECT",
-            "id": "SWORD",
-            "props": []
           }
         }
       ]

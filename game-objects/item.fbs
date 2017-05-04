@@ -1,8 +1,10 @@
 @ITEM SWORD
 
 START >>
-- SWORD.name <- "Magic"
+- $THIS.name <- "Magic"
 
 TAKE >>
-- ARENA remove SWORD
-- $INVENTORY add SWORD
+? SWORD.name is "Sadnees"
+  - ARENA remove SWORD
+  - $INVENTORY add SWORD
+x

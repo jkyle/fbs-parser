@@ -1,0 +1,16 @@
+@ITEM DEFAULT
+
+TAKE >>
+? $THIS.takeable is true
+  ? $LOCATION has $THIS
+    - $INVENTORY add $THIS
+    - $LOCATION remove $THIS
+    - ((You take {@ $THIS }.))
+  x
+  ? $LOCATION lacks $THIS
+    - ((You can't do that.))
+  x
+x
+? $THIS.takeable is false
+  - ((You can't take that.))
+x

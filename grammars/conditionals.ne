@@ -9,7 +9,7 @@ left -> game_object 							 {% id %}
 right -> (primative | game_object) {% d => d[0][0] %}
 
 # Comparators
-comparator -> (eq | ne | lt | lte | gt | gte | has)
+comparator -> (eq | ne | lt | lte | gt | gte | has | lacks)
 	{% d => d[0][0] %}
 
 eq -> ("=" | "==" | "===" | "eq" | "EQ" | "is" | "IS")
@@ -27,3 +27,4 @@ gte -> (">=" | "gte" | "GTE")
 has -> ("has" | "HAS" | "contains" | "CONTAINS" | "includes" | "INCLUDES")
 	{% d => "has" %}
 lacks -> ("lacks" | "LACKS")
+	{% d => "lacks" %}

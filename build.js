@@ -64,7 +64,7 @@ const writeFiles = (state, program) => Promise.all([
 
 readDir(__dirname + '/game-objects')
   .then(ugh => flatten(ugh))
-  .then(files => parseFiles(files))
+  .then(parseFiles)
   .then(result => result[result.length-1])
-  .then(definition => buildState(definition))
+  .then(buildState)
   .then(({state, program}) => writeFiles(state, program));

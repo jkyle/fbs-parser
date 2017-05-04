@@ -30,27 +30,36 @@ const getPropsArray = (id, props, getItems) =>
                      ['objects', id, 'id']
 
 module.exports = {
-  getProperty: ({type, id, props}, getItems) => game => {
+  getProperty: ({type, id, props}, getItems) => (game, thisObj, targetObj) => {
     const objectLocation = type === 'GAME_OBJECT' ? getPropsArray(id, props, getItems)            :
                            type === 'INVENTORY'   ? getPropsArray('PLAYER', [], true)             :
                            type === 'LOCATION'    ? getPropsArray(game.location, props, getItems) :
-                           []
+                           type === 'THIS'        ? getPropsArray(thisObj, props, getItems)       :
+                                                    []
     return getPropertyFromObject(game, objectLocation)
   },
-  setProperty: ({type, id, props}, value, setItems) => game => {
+  setProperty: ({type, id, props}, value, setItems) => (game, thisObj, targetObj) => {
+    // console.log(thisObj);
     const objectLocation = type === 'GAME_OBJECT' ? getPropsArray(id, props, setItems)            :
                            type === 'INVENTORY'   ? getPropsArray('PLAYER', [], true)             :
                            type === 'LOCATION'    ? getPropsArray(game.location, props, setItems) :
-                           []
+                           type === 'THIS'        ? getPropsArray(thisObj, props, setItems)       :
+                                                    []
     return setPropertyForObject(game, objectLocation, value)
   },
-  addItem: (object, item) => game => {
+  addItem: (object, item) => (game, thisObj, targetObj) => {
     // CUSTOM HANDLING FOR TYPES
-    const id = object.type === 'INVENTORY' ? 'PLAYER' : object.id
+    const id = object.type === 'INVENTORY' ? 'PLAYER' :
+               object.type === 'LOCATION'  ? game.locaction :
+               object.type === 'THIS'      ? thisObj :
+                               object.id
     return addItemToObject(game, id, item.id)
   },
-  removeItem: (object, item) => game => {
+  removeItem: (object, item) => (game, thisObj, targetObj) => {
     const id = object.type === 'INVENTORY' ? 'PLAYER' : object.id
+               object.type === 'LOCATION'  ? game.locaction :
+               object.type === 'THIS'      ? thisObj :
+                               object.id
     return removeItemFromObject(game, id, item.id)
   }
 }
