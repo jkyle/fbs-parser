@@ -3,7 +3,7 @@ import parsePassage from './text'
 import evaluateCondition from './conditionals'
 
 const processSet = action => {
-  const setFn = setProperty(action)
+  const setFn = setProperty(action.target, action.value)
   return game => setFn(game)
 }
 
@@ -19,12 +19,12 @@ const processCondition = action => {
 }
 
 const processAdd = action => {
-  const addFn = addItem(action.target.id, action.value.id)
+  const addFn = addItem(action.target, action.value)
   return game => addFn(game)
 }
 
 const processRemove = action => {
-  const addFn = removeItem(action.target.id, action.value.id)
+  const addFn = removeItem(action.target, action.value)
   return game => addFn(game)
 }
 

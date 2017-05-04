@@ -35,6 +35,7 @@ const nameToId = name => {
 
 const parseFile = file => fs.readFileAsync(file, 'utf8')
                             .then(result => {
+                              console.log(result);
                               p.feed(result)
                               return p.results[0]
                             })

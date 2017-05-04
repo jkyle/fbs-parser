@@ -1,4 +1,10 @@
 @LOCATION ARENA
 
+START >>
+- ARENA add SWORD
+
 LOOK >>
-- (( Hey, cool arena. ))
+- ((  Hey, cool arena.
+     {? ARENA has SWORD } This arena could use a sword.{x}
+
+     You're a rad dude.))

@@ -4,5 +4,5 @@ START >>
 - SWORD.name <- "Magic"
 
 TAKE >>
-- ARMORY remove SWORD
-- ARENA add SWORD
+- ARENA remove SWORD
+- $INVENTORY add SWORD

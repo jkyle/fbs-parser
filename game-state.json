@@ -18,6 +18,12 @@
       "type": "ITEM",
       "properties": {},
       "items": []
+    },
+    "PLAYER": {
+      "id": "PLAYER",
+      "type": "CHARACTER",
+      "properties": {},
+      "items": []
     }
   }
 }

@@ -1,85 +1,8 @@
 {
   "ARENA": [
     {
-      "method": "LOOK",
-      "actions": [
-        {
-          "type": "say",
-          "passage": {
-            "paragraphs": [
-              {
-                "lines": [
-                  {
-                    "tokens": [
-                      "Hey, cool arena."
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  ],
-  "ARMORY": [
-    {
       "method": "START",
       "actions": [
-        {
-          "type": "add",
-          "target": {
-            "type": "GAME_OBJECT",
-            "id": "ARMORY",
-            "props": []
-          },
-          "value": {
-            "type": "GAME_OBJECT",
-            "id": "SWORD",
-            "props": []
-          }
-        }
-      ]
-    }
-  ],
-  "SWORD": [
-    {
-      "method": "START",
-      "actions": [
-        {
-          "type": "say",
-          "passage": {
-            "paragraphs": [
-              {
-                "lines": [
-                  {
-                    "tokens": [
-                      "SWORD.name"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "method": "TAKE",
-      "actions": [
-        {
-          "type": "remove",
-          "target": {
-            "type": "GAME_OBJECT",
-            "id": "ARMORY",
-            "props": []
-          },
-          "value": {
-            "type": "GAME_OBJECT",
-            "id": "SWORD",
-            "props": []
-          }
-        },
         {
           "type": "add",
           "target": {
@@ -92,6 +15,158 @@
             "id": "SWORD",
             "props": []
           }
+        }
+      ]
+    },
+    {
+      "method": "LOOK",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "Hey, cool arena."
+                    ]
+                  },
+                  {
+                    "tokens": [
+                      {
+                        "type": "condition",
+                        "condition": {
+                          "left": {
+                            "type": "GAME_OBJECT",
+                            "id": "ARENA",
+                            "props": []
+                          },
+                          "operator": "has",
+                          "right": {
+                            "type": "GAME_OBJECT",
+                            "id": "SWORD",
+                            "props": []
+                          }
+                        },
+                        "passage": {
+                          "paragraphs": [
+                            {
+                              "lines": [
+                                {
+                                  "tokens": [
+                                    "This arena could use a sword."
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "You're a rad dude."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "ARMORY": [
+    {
+      "method": "LOOK",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "There's nothing in the armory."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "SWORD": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "set",
+          "target": {
+            "type": "GAME_OBJECT",
+            "id": "SWORD",
+            "props": [
+              "name"
+            ]
+          },
+          "value": "Magic"
+        }
+      ]
+    },
+    {
+      "method": "TAKE",
+      "actions": [
+        {
+          "type": "remove",
+          "target": {
+            "type": "GAME_OBJECT",
+            "id": "ARENA",
+            "props": []
+          },
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "SWORD",
+            "props": []
+          }
+        },
+        {
+          "type": "add",
+          "target": {
+            "type": "INVENTORY",
+            "props": []
+          },
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "SWORD",
+            "props": []
+          }
+        }
+      ]
+    }
+  ],
+  "PLAYER": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "set",
+          "target": {
+            "type": "GAME_OBJECT",
+            "id": "PLAYER",
+            "props": [
+              "name"
+            ]
+          },
+          "value": "Greg"
         }
       ]
     }
