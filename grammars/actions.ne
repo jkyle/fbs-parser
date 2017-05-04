@@ -5,7 +5,7 @@
 # TODO Update primatives when game objects are done.
 
 # Actions
-action -> "-" _ game_object _ operator _ primative
+action -> "-" _ game_object _ operator _ game_object_or_primative
 	{% d => ({type: d[4], target: d[2], value: d[6]}) %}
 
 action -> "-" _ ("SAY"|"say"):? __ "((" passage "))"

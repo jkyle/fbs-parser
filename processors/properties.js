@@ -6,6 +6,13 @@ const addItemToObject = (game, objectId, itemId) => {
   return setPropertyForObject(game, ['objects', objectId, 'items'], items)
 }
 
+const removeItemFromObject = (game, objectId, itemId) => {
+  const collection = game.objects[objectId].items || []
+  const items = collection.indexOf(itemId) < 0 ? collection : collection.filter(item => item !== itemId)
+  return setPropertyForObject(game, ['objects', objectId, 'items'], items)
+}
+
+
 const getPropertyFromObject = (object, propertyArr) =>
   propertyArr.reduce((acc, prop) => acc && has(acc, prop) ? acc[prop] : undefined, object)
 
@@ -35,8 +42,10 @@ module.exports = {
                            type === 'INVENTORY'   ? getPropsArray('PLAYER', [], true)             :
                            type === 'LOCATION'    ? getPropsArray(game.location, props, setItems) :
                            []
-    setPropertyForObject(game, objectLocation, value)
+    return setPropertyForObject(game, objectLocation, value)
   },
   addItem: (objectId, itemId) => game =>
-    addItemToObject(game, objectId, itemId)
+    addItemToObject(game, objectId, itemId),
+  removeItem: (objectId, itemId) => game =>
+    removeItemFromObject(game, objectId, itemId)
 }

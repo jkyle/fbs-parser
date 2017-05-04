@@ -213,7 +213,7 @@ var grammar = {
     {"name": "conditional_end", "symbols": ["conditional_end$string$1"], "postprocess": id},
     {"name": "object_property$string$1", "symbols": [{"literal":"{"}, {"literal":"@"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "object_property", "symbols": ["object_property$string$1", "_", "game_object", "__", {"literal":"}"}], "postprocess": d => d[2]},
-    {"name": "action", "symbols": [{"literal":"-"}, "_", "game_object", "_", "operator", "_", "primative"], "postprocess": d => ({type: d[4], target: d[2], value: d[6]})},
+    {"name": "action", "symbols": [{"literal":"-"}, "_", "game_object", "_", "operator", "_", "game_object_or_primative"], "postprocess": d => ({type: d[4], target: d[2], value: d[6]})},
     {"name": "action$ebnf$1$subexpression$1$string$1", "symbols": [{"literal":"S"}, {"literal":"A"}, {"literal":"Y"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "action$ebnf$1$subexpression$1", "symbols": ["action$ebnf$1$subexpression$1$string$1"]},
     {"name": "action$ebnf$1$subexpression$1$string$2", "symbols": [{"literal":"s"}, {"literal":"a"}, {"literal":"y"}], "postprocess": function joiner(d) {return d.join('');}},

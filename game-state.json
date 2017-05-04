@@ -1,6 +1,18 @@
 {
   "buffer": [],
   "objects": {
+    "ARENA": {
+      "id": "ARENA",
+      "type": "LOCATION",
+      "properties": {},
+      "items": []
+    },
+    "ARMORY": {
+      "id": "ARMORY",
+      "type": "LOCATION",
+      "properties": {},
+      "items": []
+    },
     "SWORD": {
       "id": "SWORD",
       "type": "ITEM",

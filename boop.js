@@ -9,8 +9,8 @@ const app = Object.keys(program).reduce((acc, key) =>
 // const t1 = process.hrtime();
 // const result = actions.reduce((acc, fn) => fn(acc), game)
 // const t2 = process.hrtime(t1);
+const protoState = Object.keys(app).reduce((acc, key) => app[key].START ? app[key].START(acc) : acc, initialState)
 const run = runner => (target, action) =>
-  runner[target][action](initialState)
-
-
-console.log(run(app)('ARENA', 'LOOK').buffer[0]);
+  runner[target][action](protoState)
+console.log(protoState.objects.ARMORY.items)
+console.log(run(app)('SWORD', 'TAKE').objects.ARMORY.items);

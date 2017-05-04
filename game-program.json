@@ -1,18 +1,97 @@
 {
-  "SWORD": [
+  "ARENA": [
     {
-      "method": "SWORD",
+      "method": "LOOK",
       "actions": [
         {
-          "type": "set",
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "Hey, cool arena."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "ARMORY": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "add",
           "target": {
             "type": "GAME_OBJECT",
-            "id": "SWORD",
-            "props": [
-              "name"
-            ]
+            "id": "ARMORY",
+            "props": []
           },
-          "value": "Magic"
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "SWORD",
+            "props": []
+          }
+        }
+      ]
+    }
+  ],
+  "SWORD": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "SWORD.name"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "method": "TAKE",
+      "actions": [
+        {
+          "type": "remove",
+          "target": {
+            "type": "GAME_OBJECT",
+            "id": "ARMORY",
+            "props": []
+          },
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "SWORD",
+            "props": []
+          }
+        },
+        {
+          "type": "add",
+          "target": {
+            "type": "GAME_OBJECT",
+            "id": "ARENA",
+            "props": []
+          },
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "SWORD",
+            "props": []
+          }
         }
       ]
     }

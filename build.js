@@ -35,15 +35,9 @@ const nameToId = name => {
 
 const parseFile = file => fs.readFileAsync(file, 'utf8')
                             .then(result => {
-                              try {
-                                p.feed(result)
-                              } catch (err) {
-                                console.log('aaaaajjj', err);
-                                throw new Error({ err, result })
-                              }
+                              p.feed(result)
                               return p.results[0]
                             })
-                            .catch(err => console.log(err.err, err.result));
 
 const parseFiles = files =>
   Promise.all(files.map(({ file }) => parseFile(file)))

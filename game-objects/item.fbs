@@ -1,4 +1,8 @@
 @ITEM SWORD
 
-SWORD >>
+START >>
 - SWORD.name <- "Magic"
+
+TAKE >>
+- ARMORY remove SWORD
+- ARENA add SWORD
