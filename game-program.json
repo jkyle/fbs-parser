@@ -93,6 +93,27 @@
           }
         }
       ]
+    },
+    {
+      "method": "EXIT",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "Goodbye, Arena."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "ARMORY": [
@@ -169,6 +190,34 @@
             ]
           },
           "value": true
+        }
+      ]
+    },
+    {
+      "method": "LOOK",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "Wow.",
+                      " ",
+                      {
+                        "type": "THIS",
+                        "props": []
+                      },
+                      " ",
+                      "is cool!"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     }

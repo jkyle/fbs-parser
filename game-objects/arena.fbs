@@ -9,3 +9,6 @@ LOOK >>
      {? ARENA has SWORD } This arena could use a sword.{x}
 
      You're a rad dude.))
+
+EXIT >>
+- ((Goodbye, Arena.))

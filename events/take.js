@@ -12,8 +12,8 @@ const addToInventory = item => state => {
 }
 
 const removeFromLocation = item => state => {
-  const collection = game.objects[state.location].items
-  const items = collection.indexOf(itemId) < 0 ? collection : collection.filter(item => item !== itemId)
+  const collection = state.objects[state.location].items
+  const items = collection.indexOf(item) < 0 ? collection : collection.filter(item => item !== item)
   return setPropertyForObject(state, ['objects', state.items, 'items'], items)
 }
 
@@ -23,9 +23,10 @@ export default app => (action, state) => {
       return { ...state, buffer: [`There's no ${action.subject} here.`, ...state.buffer] }
     }
 
+    const newState = app(action, state);
     // First try object's take event.
-    if (app[action.subject].TAKE) {
-      return app[action.subject].TAKE(state, action.subject)
+    if (newState !== state) {
+      return newState
     }
 
     if(state.objects[action.subject].properties.takeable) {

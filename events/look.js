@@ -7,9 +7,10 @@ export default app => (action, state) => {
       return {...state, buffer: ["You don't see that here.", ...state.buffer] }
     }
 
-    const subject = (!action.subject) ? state.location : action.subject
+    const act = !action.subject ? {...action, subject: state.location} : action
+    const newState = app(act, state)
 
-    return app[subject].LOOK ? app[subject].LOOK(state, subject) : {...state, buffer: [`You see ${subject}, but it's not very interesting.`, ...state.buffer] }
+    return newState !== state ? newState : {...state, buffer: [`You see ${act.subject}, but it's not very interesting.`, ...state.buffer] }
   }
   return state
 }
