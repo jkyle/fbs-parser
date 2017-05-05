@@ -1,4 +1,10 @@
 @LOCATION ARMORY
 
+START >>
+- $THIS add ARENA
+
 LOOK >>
 - (( There's nothing in the armory. ))
+
+ENTER >>
+- (( You see an armory. ))

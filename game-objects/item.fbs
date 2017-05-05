@@ -1,10 +1,4 @@
 @ITEM SWORD
 
 START >>
-- $THIS.name <- "Magic"
-
-TAKE >>
-? SWORD.name is "Sadnees"
-  - ARENA remove SWORD
-  - $INVENTORY add SWORD
-x
+- $THIS.takeable <- true

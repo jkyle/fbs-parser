@@ -1,4 +1,65 @@
 {
+  "ARMORY": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "add",
+          "target": {
+            "type": "THIS",
+            "props": []
+          },
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "ARENA",
+            "props": []
+          }
+        }
+      ]
+    },
+    {
+      "method": "LOOK",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "There's nothing in the armory."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "method": "ENTER",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "You see an armory."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
   "DEFAULT": [
     {
       "method": "TAKE",
@@ -143,64 +204,84 @@
           ]
         }
       ]
-    }
-  ],
-  "SWORD": [
-    {
-      "method": "START",
-      "actions": [
-        {
-          "type": "set",
-          "target": {
-            "type": "THIS",
-            "props": [
-              "name"
-            ]
-          },
-          "value": "Magic"
-        }
-      ]
     },
     {
-      "method": "TAKE",
+      "method": "LOOK",
       "actions": [
         {
           "type": "condition",
           "condition": {
             "left": {
-              "type": "GAME_OBJECT",
-              "id": "SWORD",
-              "props": [
-                "name"
-              ]
+              "type": "THIS",
+              "props": []
             },
             "operator": "===",
-            "right": "Sadnees"
+            "right": {
+              "type": "LOCATION",
+              "props": []
+            }
           },
           "actions": [
             {
-              "type": "remove",
-              "target": {
-                "type": "GAME_OBJECT",
-                "id": "ARENA",
-                "props": []
-              },
-              "value": {
-                "type": "GAME_OBJECT",
-                "id": "SWORD",
-                "props": []
+              "type": "say",
+              "passage": {
+                "paragraphs": [
+                  {
+                    "lines": [
+                      {
+                        "tokens": [
+                          "You see",
+                          " ",
+                          {
+                            "type": "LOCATION",
+                            "props": []
+                          },
+                          "",
+                          ", but it's not very interesting"
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "condition": {
+            "left": {
+              "type": "LOCATION",
+              "props": []
             },
+            "operator": "has",
+            "right": {
+              "type": "THIS",
+              "props": []
+            }
+          },
+          "actions": [
             {
-              "type": "add",
-              "target": {
-                "type": "INVENTORY",
-                "props": []
-              },
-              "value": {
-                "type": "GAME_OBJECT",
-                "id": "SWORD",
-                "props": []
+              "type": "say",
+              "passage": {
+                "paragraphs": [
+                  {
+                    "lines": [
+                      {
+                        "tokens": [
+                          "You see",
+                          " ",
+                          {
+                            "type": "THIS",
+                            "props": []
+                          },
+                          "",
+                          ", but it's not very interesting"
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             }
           ]
@@ -222,6 +303,19 @@
           "value": {
             "type": "GAME_OBJECT",
             "id": "SWORD",
+            "props": []
+          }
+        },
+        {
+          "type": "add",
+          "target": {
+            "type": "GAME_OBJECT",
+            "id": "ARENA",
+            "props": []
+          },
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "ARMORY",
             "props": []
           }
         }
@@ -281,29 +375,6 @@
                   {
                     "tokens": [
                       "You're a rad dude."
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  ],
-  "ARMORY": [
-    {
-      "method": "LOOK",
-      "actions": [
-        {
-          "type": "say",
-          "passage": {
-            "paragraphs": [
-              {
-                "lines": [
-                  {
-                    "tokens": [
-                      "There's nothing in the armory."
                     ]
                   }
                 ]

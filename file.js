@@ -5,12 +5,7 @@ function id(x) {return x[0]; }
 var grammar = {
     ParserRules: [
     {"name": "game_object", "symbols": ["name", "props"], "postprocess": d => ({ type: "GAME_OBJECT", id: d[0], props: d[1] })},
-    {"name": "game_object$string$1", "symbols": [{"literal":"$"}, {"literal":"T"}, {"literal":"H"}, {"literal":"I"}, {"literal":"S"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "game_object", "symbols": ["game_object$string$1", "props"], "postprocess": d => ({ type: "THIS", props: d[1] })},
-    {"name": "game_object$string$2", "symbols": [{"literal":"$"}, {"literal":"L"}, {"literal":"O"}, {"literal":"C"}, {"literal":"A"}, {"literal":"T"}, {"literal":"I"}, {"literal":"O"}, {"literal":"N"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "game_object", "symbols": ["game_object$string$2", "props"], "postprocess": d => ({ type: "LOCATION", props: d[1] })},
-    {"name": "game_object$string$3", "symbols": [{"literal":"$"}, {"literal":"I"}, {"literal":"N"}, {"literal":"V"}, {"literal":"E"}, {"literal":"N"}, {"literal":"T"}, {"literal":"O"}, {"literal":"R"}, {"literal":"Y"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "game_object", "symbols": ["game_object$string$3", "props"], "postprocess": d => ({ type: "INVENTORY", props: d[1] })},
+    {"name": "game_object", "symbols": [{"literal":"$"}, "name", "props"], "postprocess": d => ({ type: d[1], props: d[2] })},
     {"name": "name$ebnf$1", "symbols": [/[A-Z]/]},
     {"name": "name$ebnf$1", "symbols": ["name$ebnf$1", /[A-Z]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "name", "symbols": ["name$ebnf$1"], "postprocess": d => d[0].join('')},

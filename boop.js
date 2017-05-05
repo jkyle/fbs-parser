@@ -1,7 +1,6 @@
 import game from './game.js';
 const runner = game();
 // runner.dispatch('ARENA', 'LOOK')
-runner.subscribe(state => console.log(state.buffer[0]))
-runner.dispatch('SWORD', 'TAKE')
-// runner.dispatch('ARENA', 'TAKE')
+runner.subscribe(state => console.log(state.location, state.buffer))
+runner.dispatch('ARMORY', 'GO')
 // runner.dispatch('ARENA', 'BUTT')

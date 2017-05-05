@@ -48,7 +48,7 @@ const buildState = definition => {
   const state = ({ location: undefined, buffer: [] })
   // const program = global ? ({ GAME: global.events }) : {}
 
-  const stateObjects = definition.filter(item => item.type !== 'GLOBAL').reduce((acc, item) => ({...acc, [item.id]: {id: item.id, type: item.type, properties: {}, items: []} }), {})
+  const stateObjects = definition.filter(item => item.type !== 'GLOBAL').reduce((acc, item) => ({...acc, [item.id]: {id: item.id, type: item.type, properties: {}, items: [], exits: []} }), {})
   const program = definition.reduce((acc, item) => ({...acc, [item.id]: item.events }), {})
 
   state.objects = stateObjects;

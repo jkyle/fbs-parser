@@ -37,7 +37,8 @@ const parseToken = token => {
   } else if (token.type === 'condition') {
     const stringFn = conditionToken(token);
     return (game, thisObj, targetObj) => stringFn(game, thisObj, targetObj)
-  } else if (token.type === 'GAME_OBJECT') {
+  } else {
+    // Assume it's a game object?
     const stringFn = getProperty(token);
     return (game, thisObj, targetObj) => stringFn(game, thisObj, targetObj)
   }
@@ -45,7 +46,6 @@ const parseToken = token => {
 
 const parseLine = line => {
   const tokens = line.tokens.map(parseToken)
-
   return (game, thisObj, targetObj) => {
     return tokens.map(t => t(game, thisObj, targetObj)).join('')
   }

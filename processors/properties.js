@@ -1,9 +1,20 @@
 const has = (object, prop) => Object.prototype.hasOwnProperty.call(object, prop)
 
 const addItemToObject = (game, objectId, itemId) => {
+  const subject = game.objects[objectId];
+  const target = game.objects[itemId];
+  if(subject.type === 'LOCATION' && target.type === 'LOCATION') {
+    return addExitToObject(game, objectId, itemId);
+  }
   const collection = game.objects[objectId].items || []
   const items = collection.indexOf(itemId) < 0 ? [...collection, itemId] : collection
   return setPropertyForObject(game, ['objects', objectId, 'items'], items)
+}
+
+const addExitToObject = (game, subjectId, destinationId) => {
+  const collection = game.objects[subjectId].exits || []
+  const exits = collection.indexOf(destinationId) < 0 ? [...collection, destinationId] : collection
+  return setPropertyForObject(game, ['objects', subjectId, 'exits'], exits)
 }
 
 const removeItemFromObject = (game, objectId, itemId) => {
@@ -53,13 +64,25 @@ module.exports = {
                object.type === 'LOCATION'  ? game.locaction :
                object.type === 'THIS'      ? thisObj :
                                object.id
-    return addItemToObject(game, id, item.id)
+     const itemId = item.type === 'INVENTORY' ? 'PLAYER' :
+                    item.type === 'LOCATION'  ? game.locaction :
+                    item.type === 'THIS'      ? thisObj :
+                                                item.id
+    return addItemToObject(game, id, itemId)
+  },
+  addExit: (location, destination) => (game, thisObj, targetObj) => {
+    return addExitToObject(game, location.id, destination.id);
   },
   removeItem: (object, item) => (game, thisObj, targetObj) => {
-    const id = object.type === 'INVENTORY' ? 'PLAYER' : object.id
-               object.type === 'LOCATION'  ? game.locaction :
-               object.type === 'THIS'      ? thisObj :
-                               object.id
-    return removeItemFromObject(game, id, item.id)
+    const id = object.type === 'INVENTORY' ? 'PLAYER'       :
+               object.type === 'LOCATION'  ? game.location :
+               object.type === 'THIS'      ? thisObj        :
+                                             object.id
+
+   const itemId = item.type === 'INVENTORY' ? 'PLAYER' :
+                  item.type === 'LOCATION'  ? game.location :
+                  item.type === 'THIS'      ? thisObj :
+                                              item.id
+    return removeItemFromObject(game, id, itemId)
   }
 }

@@ -1,4 +1,4 @@
-import { getProperty, setProperty, addItem, removeItem } from './properties'
+import { getProperty, setProperty, addItem, removeItem, addExit } from './properties'
 import parsePassage from './text'
 import evaluateCondition from './conditionals'
 

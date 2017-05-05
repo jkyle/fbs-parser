@@ -1,35 +1,33 @@
 {
   "buffer": [],
   "objects": {
+    "ARMORY": {
+      "id": "ARMORY",
+      "type": "LOCATION",
+      "properties": {},
+      "items": [],
+      "exits": []
+    },
     "DEFAULT": {
       "id": "DEFAULT",
       "type": "ITEM",
       "properties": {},
-      "items": []
-    },
-    "SWORD": {
-      "id": "SWORD",
-      "type": "ITEM",
-      "properties": {},
-      "items": []
+      "items": [],
+      "exits": []
     },
     "ARENA": {
       "id": "ARENA",
       "type": "LOCATION",
       "properties": {},
-      "items": []
-    },
-    "ARMORY": {
-      "id": "ARMORY",
-      "type": "LOCATION",
-      "properties": {},
-      "items": []
+      "items": [],
+      "exits": []
     },
     "PLAYER": {
       "id": "PLAYER",
       "type": "CHARACTER",
       "properties": {},
-      "items": []
+      "items": [],
+      "exits": []
     }
   }
 }

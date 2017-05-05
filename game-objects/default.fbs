@@ -14,3 +14,11 @@ x
 ? $THIS.takeable is false
   - ((You can't take that.))
 x
+
+LOOK >>
+? $THIS is $LOCATION
+  - ((You see {@ $LOCATION}, but it's not very interesting))
+x
+? $LOCATION has $THIS
+  - ((You see {@ $THIS}, but it's not very interesting))
+x
