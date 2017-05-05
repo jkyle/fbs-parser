@@ -1,294 +1,4 @@
 {
-  "ARMORY": [
-    {
-      "method": "START",
-      "actions": [
-        {
-          "type": "add",
-          "target": {
-            "type": "THIS",
-            "props": []
-          },
-          "value": {
-            "type": "GAME_OBJECT",
-            "id": "ARENA",
-            "props": []
-          }
-        }
-      ]
-    },
-    {
-      "method": "LOOK",
-      "actions": [
-        {
-          "type": "say",
-          "passage": {
-            "paragraphs": [
-              {
-                "lines": [
-                  {
-                    "tokens": [
-                      "There's nothing in the armory."
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "method": "ENTER",
-      "actions": [
-        {
-          "type": "say",
-          "passage": {
-            "paragraphs": [
-              {
-                "lines": [
-                  {
-                    "tokens": [
-                      "You see an armory."
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  ],
-  "DEFAULT": [
-    {
-      "method": "TAKE",
-      "actions": [
-        {
-          "type": "condition",
-          "condition": {
-            "left": {
-              "type": "THIS",
-              "props": [
-                "takeable"
-              ]
-            },
-            "operator": "===",
-            "right": true
-          },
-          "actions": [
-            {
-              "type": "condition",
-              "condition": {
-                "left": {
-                  "type": "LOCATION",
-                  "props": []
-                },
-                "operator": "has",
-                "right": {
-                  "type": "THIS",
-                  "props": []
-                }
-              },
-              "actions": [
-                {
-                  "type": "add",
-                  "target": {
-                    "type": "INVENTORY",
-                    "props": []
-                  },
-                  "value": {
-                    "type": "THIS",
-                    "props": []
-                  }
-                },
-                {
-                  "type": "remove",
-                  "target": {
-                    "type": "LOCATION",
-                    "props": []
-                  },
-                  "value": {
-                    "type": "THIS",
-                    "props": []
-                  }
-                },
-                {
-                  "type": "say",
-                  "passage": {
-                    "paragraphs": [
-                      {
-                        "lines": [
-                          {
-                            "tokens": [
-                              "You take",
-                              " ",
-                              {
-                                "type": "THIS",
-                                "props": []
-                              },
-                              "",
-                              "."
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "type": "condition",
-              "condition": {
-                "left": {
-                  "type": "LOCATION",
-                  "props": []
-                },
-                "operator": "lacks",
-                "right": {
-                  "type": "THIS",
-                  "props": []
-                }
-              },
-              "actions": [
-                {
-                  "type": "say",
-                  "passage": {
-                    "paragraphs": [
-                      {
-                        "lines": [
-                          {
-                            "tokens": [
-                              "You can't do that."
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "condition",
-          "condition": {
-            "left": {
-              "type": "THIS",
-              "props": [
-                "takeable"
-              ]
-            },
-            "operator": "===",
-            "right": false
-          },
-          "actions": [
-            {
-              "type": "say",
-              "passage": {
-                "paragraphs": [
-                  {
-                    "lines": [
-                      {
-                        "tokens": [
-                          "You can't take that."
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "method": "LOOK",
-      "actions": [
-        {
-          "type": "condition",
-          "condition": {
-            "left": {
-              "type": "THIS",
-              "props": []
-            },
-            "operator": "===",
-            "right": {
-              "type": "LOCATION",
-              "props": []
-            }
-          },
-          "actions": [
-            {
-              "type": "say",
-              "passage": {
-                "paragraphs": [
-                  {
-                    "lines": [
-                      {
-                        "tokens": [
-                          "You see",
-                          " ",
-                          {
-                            "type": "LOCATION",
-                            "props": []
-                          },
-                          "",
-                          ", but it's not very interesting"
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "type": "condition",
-          "condition": {
-            "left": {
-              "type": "LOCATION",
-              "props": []
-            },
-            "operator": "has",
-            "right": {
-              "type": "THIS",
-              "props": []
-            }
-          },
-          "actions": [
-            {
-              "type": "say",
-              "passage": {
-                "paragraphs": [
-                  {
-                    "lines": [
-                      {
-                        "tokens": [
-                          "You see",
-                          " ",
-                          {
-                            "type": "THIS",
-                            "props": []
-                          },
-                          "",
-                          ", but it's not very interesting"
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "ARENA": [
     {
       "method": "START",
@@ -381,6 +91,84 @@
               }
             ]
           }
+        }
+      ]
+    }
+  ],
+  "ARMORY": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "add",
+          "target": {
+            "type": "THIS",
+            "props": []
+          },
+          "value": {
+            "type": "GAME_OBJECT",
+            "id": "ARENA",
+            "props": []
+          }
+        }
+      ]
+    },
+    {
+      "method": "LOOK",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "There's nothing in the armory."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "method": "ENTER",
+      "actions": [
+        {
+          "type": "say",
+          "passage": {
+            "paragraphs": [
+              {
+                "lines": [
+                  {
+                    "tokens": [
+                      "You see an armory."
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "SWORD": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "set",
+          "target": {
+            "type": "THIS",
+            "props": [
+              "takeable"
+            ]
+          },
+          "value": true
         }
       ]
     }

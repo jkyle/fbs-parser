@@ -1,6 +1,13 @@
 {
   "buffer": [],
   "objects": {
+    "ARENA": {
+      "id": "ARENA",
+      "type": "LOCATION",
+      "properties": {},
+      "items": [],
+      "exits": []
+    },
     "ARMORY": {
       "id": "ARMORY",
       "type": "LOCATION",
@@ -8,16 +15,9 @@
       "items": [],
       "exits": []
     },
-    "DEFAULT": {
-      "id": "DEFAULT",
+    "SWORD": {
+      "id": "SWORD",
       "type": "ITEM",
-      "properties": {},
-      "items": [],
-      "exits": []
-    },
-    "ARENA": {
-      "id": "ARENA",
-      "type": "LOCATION",
       "properties": {},
       "items": [],
       "exits": []

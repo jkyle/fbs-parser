@@ -33,12 +33,13 @@ const nameToId = name => {
 }
 
 
-const parseFile = file => fs.readFileAsync(file, 'utf8')
+const parseFile = file => console.log(file) || fs.readFileAsync(file, 'utf8')
                             .then(result => {
-                              console.log(result);
                               p.feed(result)
+                              console.log(p.results[0]);
                               return p.results[0]
                             })
+                            .catch(e => console.log('eer'));
 
 const parseFiles = files =>
   Promise.all(files.map(({ file }) => parseFile(file)))
