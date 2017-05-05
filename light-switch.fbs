@@ -1,7 +1,9 @@
 @ITEM LIGHT SWITCH
 
-LOOK >>
+USE >>
 - <LIGHT SWITCH>.position <- "on"
+
+LOOK >>
 ? FOO.bar is "baz"
   - ((
       Hello world. This is a

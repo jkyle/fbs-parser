@@ -1,10 +1,10 @@
 {
-  "name": "parser",
+  "name": "fbs file parser and game engine",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"lol\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
     "bluebird": "^3.5.0",
-    "nearley": "^2.8.0",
-    "nodemon": "^1.11.0"
+    "nearley": "^2.8.0"
   }
 }
