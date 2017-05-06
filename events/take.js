@@ -17,12 +17,8 @@ const removeFromLocation = item => state => {
   return setPropertyForObject(state, ['objects', state.items, 'items'], items)
 }
 
-export default app => (action, state) => {
+export default app => (next, done) => (action, state) => {
   if (action.type === 'TAKE') {
-    if(state.objects[state.location].items.indexOf(action.subject) < 0) {
-      return { ...state, buffer: [`There's no ${action.subject} here.`, ...state.buffer] }
-    }
-
     const newState = app(action, state);
     // First try object's take event.
     if (newState !== state) {
@@ -36,5 +32,5 @@ export default app => (action, state) => {
 
     return { ...state, buffer: [`You can't take ${action.subject}.`, ...state.buffer ] }
   }
-  return state;
+  return next(action, state);
 }
