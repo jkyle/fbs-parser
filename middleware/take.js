@@ -20,7 +20,7 @@ const removeFromLocation = item => state => {
 const atLocation = (subject, state) =>
   (state.objects[state.location].exits.indexOf(subject) > -1 || state.objects[state.location].items.indexOf(subject) > -1)
 
-export default next => (event, state, cb) => {
+export default next => (event, state, done) => {
   if (event.type === 'TAKE') {
     if(!atLocation(event.subject, state)) {
       return { ...state, buffer: [`There's no ${event.subject} here.`, ...state.buffer] }
@@ -38,5 +38,5 @@ export default next => (event, state, cb) => {
                  buffer: [`You take ${event.subject}`, ...newState.buffer] }
     })
   }
-  return next(event, state, cb);
+  return next(event, state, done);
 }

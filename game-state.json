@@ -8,16 +8,16 @@
       "items": [],
       "exits": []
     },
-    "ARMORY": {
-      "id": "ARMORY",
-      "type": "LOCATION",
+    "SWORD": {
+      "id": "SWORD",
+      "type": "ITEM",
       "properties": {},
       "items": [],
       "exits": []
     },
-    "SWORD": {
-      "id": "SWORD",
-      "type": "ITEM",
+    "ARMORY": {
+      "id": "ARMORY",
+      "type": "LOCATION",
       "properties": {},
       "items": [],
       "exits": []

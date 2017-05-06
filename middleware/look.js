@@ -4,7 +4,7 @@ const atLocation = (subject, state) =>
 const inInventory = (subject, state) =>
   state.objects.PLAYER.items.indexOf(subject) > -1
 
-export default next => (event, state, cb) => {
+export default next => (event, state, done) => {
   if (event.type === 'LOOK') {
       if(!(inInventory(event.subject, state) || atLocation(event.subject, state)) ) {
         return {...state, buffer: ["You don't see that here.", ...state.buffer] }
@@ -20,5 +20,5 @@ export default next => (event, state, cb) => {
       })
 
   }
-  return next(event, state, cb);
+  return next(event, state, done);
 }
