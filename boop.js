@@ -1,16 +1,19 @@
-import game from './game.js';
-import initialState from './game-state.json';
-import program from './game-program.json';
-import IN_LOCATION from './events/in-location';
-import TAKE from './events/take'
+import createGame from './game.js';
+import initialState from './game-state.json'
+import program from './game-program.json'
+import look from './middleware/look'
+import take from './middleware/take'
+import go from './middleware/go'
+import nothing from './middleware/nothing-happens'
+import clear from './middleware/clear-buffer'
 
 
-const runner = game(program, initialState, [IN_LOCATION, TAKE]);
-// runner.dispatch('ARENA', 'LOOK')
-runner.subscribe(state => console.log(state.location, state.buffer[0]))
-// runner.dispatch('ARMORY', 'GO')
-runner.dispatch('SWORD', 'TAKE')
-runner.dispatch('ARENA', 'GO')
-runner.dispatch('ARENA', 'GO')
-runner.dispatch('SWORD', 'TAKE')
-runner.dispatch('SWORD', 'LOOK')
+const game = createGame(program, initialState, [clear, nothing, look, go, take]);
+// game.dispatch('ARENA', 'LOOK')
+game.start({location: 'ARENA', buffer: ['Welcome to the game.']});
+game.subscribe(state => {console.log(state.location, state.buffer)})
+// game.dispatch('ARMORY', 'GO')
+game.dispatch('SWORD', 'TAKE')
+game.dispatch('ARMORY', 'GO')
+game.dispatch('SWORD', 'TAKE')
+game.dispatch('SWORD', 'BUTT')
