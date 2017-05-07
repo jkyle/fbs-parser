@@ -1,2 +1,2 @@
-export default next => (event, state, done) =>
-  event.type === 'START' ? next(event, state, done) : next(event, {...state, buffer: [] }, done)
+export default next => (event, state) =>
+  event.type === 'START' ? next(event, state) : next(event, {...state, buffer: [] })

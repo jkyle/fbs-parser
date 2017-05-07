@@ -20,7 +20,7 @@ const removeFromLocation = item => state => {
 const atLocation = (subject, state) =>
   (state.objects[state.location].exits.indexOf(subject) > -1 || state.objects[state.location].items.indexOf(subject) > -1)
 
-export default next => (event, state, done) => {
+export default next => (event, state) => {
   if (event.type === 'TAKE') {
     if(!atLocation(event.subject, state)) {
       return { ...state, buffer: [`There's no ${event.subject} here.`, ...state.buffer] }
@@ -30,13 +30,13 @@ export default next => (event, state, done) => {
       return { ...state, buffer: [`You can't take ${event.subject}.`, ...state.buffer ] }
     }
 
-    return next(event, state, newState => {
-        if(newState !== state) {
-          return newState;
-        }
-        return { ...[addToInventory(event.subject), removeFromLocation(event.subject)].reduce((acc, fn) => fn(acc), newState),
-                 buffer: [`You take ${event.subject}`, ...newState.buffer] }
-    })
+    const newState = next(event, state)
+    if(newState !== state) {
+      return newState;
+    }
+    return { ...[addToInventory(event.subject), removeFromLocation(event.subject)].reduce((acc, fn) => fn(acc), newState),
+             buffer: [`You take ${event.subject}`, ...newState.buffer] }
+
   }
-  return next(event, state, done);
+  return next(event, state);
 }

@@ -3,7 +3,7 @@ const atLocation = (subject, state) =>
   (state.objects[state.location].exits.indexOf(subject) > -1 || state.objects[state.location].items.indexOf(subject) > -1)
 
 
-export default next => (event, state, cb) => {
+export default next => (event, state) => {
   if(event.type === 'GO') {
     if(!atLocation(event.subject, state)) {
       return { ...state, buffer: ["You can't go there from here.", ...state.buffer] }
@@ -17,5 +17,5 @@ export default next => (event, state, cb) => {
       )
     )
   }
-  return next(event, state, cb);
+  return next(event, state);
 }
