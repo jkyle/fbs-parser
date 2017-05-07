@@ -1,23 +1,8 @@
-import processor from './processors/file';
-
-const initProgram = program => {
-  const exe = Object.keys(program).reduce((acc, key) => ({...acc, [key]: processor(program[key]) }), {})
-  return (event, state, cb) => {
-    const legitEvent = exe[event.subject] && exe[event.subject][event.type];
-    return legitEvent && cb ? cb(legitEvent(state, event.subject, event.target)) :
-           legitEvent       ? legitEvent(state, event.subject, event.target)     :
-           cb               ? cb(state)                                          :
-                              state
-  }
-}
-
-const composeMiddleware = (middleware, done) =>
-  middleware.length > 0 ? middleware.reverse().reduce((acc, fn) => (...args) => fn(acc(...args)))(done) : done
+const composeMiddleware = (middleware) =>
+  middleware.length > 0 ? middleware.reverse().reduce((acc, fn) => (...args) => fn(acc(...args)))((event, state) => state) : (event, state) => state
 
 export default (program, middleware) => {
-  const defaultEvent = initProgram(program)
-  const processEvent = composeMiddleware(middleware, defaultEvent)
-
+  const processEvent = composeMiddleware(middleware)
   const subscribers = []
   let state;
 

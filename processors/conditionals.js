@@ -7,7 +7,7 @@ const comparators = {
   '>=': (left, right) => left >= right,
   '<=': (left, right) => left <= right,
   '!==': (left, right) => left !== right,
-  has: (left, right) => (left.indexOf(right) > -1),
+  has: (left, right) => left.indexOf(right) > -1,
   lacks: (left, right) => left.indexOf(right) < 0
 }
 
