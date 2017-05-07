@@ -82,21 +82,21 @@ var buildState = function buildState(definition) {
   }).reduce(function (acc, item) {
     return _extends({}, acc, _defineProperty({}, item.id, { id: item.id, type: item.type, properties: {}, items: [], exits: [] }));
   }, {});
-  var program = definition.reduce(function (acc, item) {
+  var exe = definition.reduce(function (acc, item) {
     return _extends({}, acc, _defineProperty({}, item.id, item.events));
   }, {});
 
   state.objects = stateObjects;
 
-  return { state: state, program: program };
+  return { state: state, exe: exe };
 };
 
-var writeFiles = function writeFiles(state, program) {
-  return _bluebird2.default.all([fs.writeFileAsync(_path2.default.resolve(dir + '/' + (program.output || 'build') + '/state.json'), JSON.stringify(state)), fs.writeFileAsync(_path2.default.resolve(dir + '/' + (program.output || 'build') + '/program.json'), JSON.stringify(program))]);
+var writeFiles = function writeFiles(state, exe) {
+  return _bluebird2.default.all([fs.writeFileAsync(_path2.default.resolve(dir + '/' + (_commander2.default.output || 'build') + '/state.json'), JSON.stringify(state)), fs.writeFileAsync(_path2.default.resolve(dir + '/' + (_commander2.default.output || 'build') + '/program.json'), JSON.stringify(exe))]);
 };
 
 readDir(_path2.default.resolve(dir + '/' + (_commander2.default.input || 'game-objects'))).then(flatten).then(parseFiles).then(buildState).then(function (_ref2) {
   var state = _ref2.state,
-      program = _ref2.program;
-  return writeFiles(state, program);
+      exe = _ref2.exe;
+  return writeFiles(state, exe);
 });

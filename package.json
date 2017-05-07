@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel ./lib --out-dir ./bin",
+    "build": "babel lib/bin --out-dir bin && babel lib/src --out-dir dist",
+    "compile": "nearleyc lib/grammars/fbs.ne -o lib/bin/fbs-grammar.js",
     "test": "echo \"lol\" && exit 1"
   },
   "bin": {
     "fbs": "bin/fbs.js"
   },
+  "main": "dist/index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",

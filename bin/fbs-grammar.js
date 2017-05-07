@@ -9,6 +9,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       return x[0];
    }
    var grammar = {
+      Lexer: undefined,
       ParserRules: [{ "name": "game_object", "symbols": ["name", "props"], "postprocess": function postprocess(d) {
             return { type: "GAME_OBJECT", id: d[0], props: d[1] };
          } }, { "name": "game_object", "symbols": [{ "literal": "$" }, "name", "props"], "postprocess": function postprocess(d) {

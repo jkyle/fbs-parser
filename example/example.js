@@ -1,6 +1,4 @@
-import createGame from './game'
-import middleware from './middleware'
-import processor from './processor'
+import { createGame, processor, defaultMiddleware } from '../dist'
 
 import initialState from './build/state.json'
 import program from './build/program.json'
@@ -9,7 +7,7 @@ const fbs = processor(program);
 
 const game = createGame(
   {...initialState, location: 'ARENA', buffer: ['Welcome to the game.']},
-  [...middleware, fbs]
+  [...defaultMiddleware, fbs]
 );
 
 game.dispatch({type: 'START'})
