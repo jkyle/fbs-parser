@@ -1,12 +1,12 @@
-import { createGame, processor, defaultMiddleware } from '../dist'
+const { createGame, processor, defaultMiddleware } = require('../dist');
 
-import initialState from './build/state.json'
-import program from './build/program.json'
+const initialState = require('./build/state.json')
+const program = require('./build/program.json')
 
 const fbs = processor(program);
 
 const game = createGame(
-  {...initialState, location: 'ARENA', buffer: ['Welcome to the game.']},
+  Object.assign({}, initialState, {location: 'ARENA', buffer: ['Welcome to the game.']}),
   [...defaultMiddleware, fbs]
 );
 
