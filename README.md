@@ -1,3 +1,7 @@
+# Getting started.
+
+`npm install --save https://github.com/jkyle/fbs-parser.git`
+
 # Overview
 
 > This doc is a WIP.
@@ -84,15 +88,11 @@ In this case, the state didn't change because there were no other middleware fun
 
 * Your game needs at least one location and a player. That means one `.fbs` file that has
 
-```
-@PLAYER PLAYER
-```
+`@PLAYER PLAYER`
 
 and one that has
 
-```
-@LOCATION WHATEVER
-```
+`@LOCATION WHATEVER`
 
 * Your initial state also needs a starting location:
 
@@ -103,6 +103,7 @@ const { createGame } = require('fbs')
 const game = createGame( Object.assign({}, initialState, { location: 'WHATEVER' })
 ```
 
+* These constraints will probably get fixed.
 
 # TODO
 
