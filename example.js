@@ -2,8 +2,8 @@ import createGame from './game'
 import middleware from './middleware'
 import processor from './processor'
 
-import initialState from './build/game-state.json'
-import program from './build/game-program.json'
+import initialState from './build/state.json'
+import program from './build/program.json'
 
 const fbs = processor(program);
 

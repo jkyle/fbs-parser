@@ -1,10 +1,14 @@
 {
-  "name": "fbs file parser and game engine",
+  "name": "fbs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "babel ./lib --out-dir ./bin",
     "test": "echo \"lol\" && exit 1"
+  },
+  "bin": {
+    "fbs": "bin/fbs.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +19,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
     "bluebird": "^3.5.0",
+    "commander": "^2.9.0",
     "nearley": "^2.8.0"
   }
 }
