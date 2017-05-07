@@ -19,7 +19,9 @@
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-latest": "^6.24.1",
+    "babel-preset-latest": "^6.24.1"
+  },
+  "dependencies": {
     "bluebird": "^3.5.0",
     "commander": "^2.9.0",
     "nearley": "^2.8.0"
