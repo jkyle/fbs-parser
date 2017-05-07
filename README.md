@@ -80,6 +80,30 @@ In this case, the state didn't change because there were no other middleware fun
 
 // ALSO TODO: Write the input parser :-/
 
+# Important notes.
+
+* Your game needs at least one location and a player. That means one `.fbs` file that has
+
+```
+@PLAYER PLAYER
+```
+
+and one that has
+
+```
+@LOCATION WHATEVER
+```
+
+* Your initial state also needs a starting location:
+
+```javascript
+const initialState = require('path/to/state.json')
+const { createGame } = require('fbs')
+
+const game = createGame( Object.assign({}, initialState, { location: 'WHATEVER' })
+```
+
+
 # TODO
 
 * [ ] Math Expressions
