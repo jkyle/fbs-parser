@@ -116,51 +116,6 @@
       ]
     }
   ],
-  "SWORD": [
-    {
-      "method": "START",
-      "actions": [
-        {
-          "type": "set",
-          "target": {
-            "type": "THIS",
-            "props": [
-              "takeable"
-            ]
-          },
-          "value": true
-        }
-      ]
-    },
-    {
-      "method": "LOOK",
-      "actions": [
-        {
-          "type": "say",
-          "passage": {
-            "paragraphs": [
-              {
-                "lines": [
-                  {
-                    "tokens": [
-                      "Wow.",
-                      " ",
-                      {
-                        "type": "THIS",
-                        "props": []
-                      },
-                      " ",
-                      "is cool!"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  ],
   "ARMORY": [
     {
       "method": "START",
@@ -220,9 +175,26 @@
           }
         }
       ]
+    }
+  ],
+  "SWORD": [
+    {
+      "method": "START",
+      "actions": [
+        {
+          "type": "set",
+          "target": {
+            "type": "THIS",
+            "props": [
+              "takeable"
+            ]
+          },
+          "value": true
+        }
+      ]
     },
     {
-      "method": "GO",
+      "method": "LOOK",
       "actions": [
         {
           "type": "say",
@@ -232,7 +204,14 @@
                 "lines": [
                   {
                     "tokens": [
-                      "This still works."
+                      "Wow.",
+                      " ",
+                      {
+                        "type": "THIS",
+                        "props": []
+                      },
+                      " ",
+                      "is cool!"
                     ]
                   }
                 ]

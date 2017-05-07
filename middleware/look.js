@@ -11,7 +11,6 @@ export default next => (originalEvent, state) => {
         return {...state, buffer: ["You don't see that here.", ...state.buffer] }
       }
 
-
       const newState = next(event, state)
       if(newState !== state) {
         return newState

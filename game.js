@@ -1,19 +1,17 @@
-const composeMiddleware = (middleware) =>
-  middleware.length > 0 ? middleware.reverse().reduce((acc, fn) => (...args) => fn(acc(...args)))((event, state) => state) : (event, state) => state
+const noop = (event, state) => state
 
-export default (program, middleware) => {
+const composeMiddleware = (middleware = []) =>
+  middleware.length > 0 ? middleware.reverse().reduce((acc, fn) => (...args) => fn(acc(...args)))(noop) : noop
+
+export default (initialState, middleware) => {
   const processEvent = composeMiddleware(middleware)
   const subscribers = []
-  let state;
+  let state = initialState;
 
   return {
-    start: (gameState) => {
-      state = processEvent({ type: 'START'}, gameState)
-      // state = Object.keys(program).reduce((acc, key) => processEvent({ subject: key, type: 'START'}, acc), gameState)
-    },
     subscribe: (cb) => { subscribers.push(cb); cb(state) },
-    dispatch: (subject, type, target) => {
-      state = processEvent({ subject, type, target}, state)
+    dispatch: (action) => {
+      state = processEvent(action, state)
       subscribers.forEach(cb => cb(state))
     }
   }

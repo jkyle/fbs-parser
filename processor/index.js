@@ -1,4 +1,4 @@
-import processor from '../processors/file';
+import processor from './file';
 
 export default program => {
   const exe = Object.keys(program).reduce((acc, key) => ({...acc, [key]: processor(program[key]) }), {})

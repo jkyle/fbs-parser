@@ -1,7 +1,7 @@
 import _fs from 'fs'
 import path from 'path'
 import Promise from 'bluebird'
-var grammar = require("./file.js");
+var grammar = require("./fbs.js");
 var nearley = require("nearley");
 
 const fs = Promise.promisifyAll(_fs);
@@ -59,8 +59,8 @@ const buildState = definition => {
 }
 
 const writeFiles = (state, program) => Promise.all([
-  fs.writeFileAsync('./game-state.json', JSON.stringify(state, null, 2)),
-  fs.writeFileAsync('./game-program.json', JSON.stringify(program, null, 2))
+  fs.writeFileAsync('./build/game-state.json', JSON.stringify(state, null, 2)),
+  fs.writeFileAsync('./build/game-program.json', JSON.stringify(program, null, 2))
 ])
 
 readDir(__dirname + '/game-objects')
