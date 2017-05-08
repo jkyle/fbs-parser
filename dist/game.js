@@ -1,8 +1,15 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _inputParser = require('./input-parser');
+
+var _inputParser2 = _interopRequireDefault(_inputParser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var noop = function noop(event, state) {
   return state;
 };
@@ -25,7 +32,8 @@ exports.default = function (initialState, middleware) {
     subscribe: function subscribe(cb) {
       subscribers.push(cb);cb(state);
     },
-    dispatch: function dispatch(action) {
+    dispatch: function dispatch(input) {
+      var action = typeof input === 'string' ? (0, _inputParser2.default)(input) : input;
       state = processEvent(action, state);
       subscribers.forEach(function (cb) {
         return cb(state);

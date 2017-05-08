@@ -12,8 +12,8 @@ const game = createGame(
 
 game.dispatch({type: 'START'})
 game.subscribe(state => {console.log(state.location, state.buffer)})
-game.dispatch({type: 'LOOK'})
-game.dispatch({subject: 'SWORD', type: 'TAKE'})
-game.dispatch({subject: 'ARMORY', type: 'GO'})
-game.dispatch({subject: 'SWORD', type: 'TAKE'})
-game.dispatch({subject: 'SWORD', type: 'LOOK'})
+game.dispatch('look')
+game.dispatch('take sword')
+game.dispatch('go to the armory')
+game.dispatch('take sword')
+game.dispatch('look at the sword')
