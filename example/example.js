@@ -10,10 +10,9 @@ const game = createGame(
   [...defaultMiddleware, fbs]
 );
 
-game.dispatch({type: 'START'})
+game.dispatch('start')
 game.subscribe(state => {console.log(state.location, state.buffer)})
 game.dispatch('look')
 game.dispatch('take sword')
-game.dispatch('go to the armory')
 game.dispatch('take sword')
-game.dispatch('look at the sword')
+game.dispatch('look at sword')

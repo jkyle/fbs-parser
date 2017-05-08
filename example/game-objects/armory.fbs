@@ -2,9 +2,16 @@
 
 START >>
 - $THIS add ARENA
+- $THIS.power <- false
+- $THIS add <LIGHT SWITCH>
 
 LOOK >>
-- (( There's nothing in the armory. ))
+? $THIS.power is false
+  - (( You can't see anything.))
+x
+? $THIS.power is true
+  - (( There's nothing in the armory. ))
+x
 
 ENTER >>
 - (( You see an armory. ))
