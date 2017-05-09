@@ -8,7 +8,22 @@ var _inputParser = require('./input-parser');
 
 var _inputParser2 = _interopRequireDefault(_inputParser);
 
+var _selectors = require('./selectors');
+
+var _selectors2 = _interopRequireDefault(_selectors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var selectors = {
+  $LOCATION: ['$OBJECTS', ['$GLOBAL', 'location']],
+  $OBJECTS: ['objects'],
+  $GLOBAL: [],
+  $BUFFER: ['buffer'],
+  $PLAYER: ['PLAYER'],
+  $INVENTORY: ['$PLAYER', 'items']
+};
+
+var select = (0, _selectors2.default)(selectors);
 
 var noop = function noop(event, state) {
   return state;
@@ -18,7 +33,7 @@ var composeMiddleware = function composeMiddleware() {
   var middleware = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   return middleware.length > 0 ? middleware.reverse().reduce(function (acc, fn) {
     return function () {
-      return fn(acc.apply(undefined, arguments));
+      return fn(acc.apply(undefined, arguments), select);
     };
   })(noop) : noop;
 };

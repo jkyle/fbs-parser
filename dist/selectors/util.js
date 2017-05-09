@@ -27,3 +27,15 @@ var getPropertyFromObject = exports.getPropertyFromObject = function getProperty
     return acc && has(acc, prop) ? acc[prop] : undefined;
   }, object);
 };
+
+var compose = exports.compose = function compose() {
+  for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
+    fns[_key] = arguments[_key];
+  }
+
+  return function (state) {
+    return fns.reduce(function (acc, fn) {
+      return fn(acc);
+    }, state);
+  };
+};
