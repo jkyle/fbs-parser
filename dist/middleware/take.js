@@ -15,14 +15,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (next, select) {
   return function (event, state) {
     if (event.type === 'TAKE') {
-      var atLocation = select.get('$LOCATION.items')(state).indexOf(event.subject) > -1 || select.get('$LOCATION.exits')(state).indexOf(event.subject) > -1;
+      var atLocation = select('$LOCATION.items').get()(state).indexOf(event.subject) > -1 || select('$LOCATION.exits').get()(state).indexOf(event.subject) > -1;
 
       if (!atLocation) {
-        return select.add('$BUFFER', 'There\'s no ' + event.subject + ' here.')(state);
+        return select('$BUFFER').add('There\'s no ' + event.subject + ' here.')(state);
       }
 
-      if (!select.get([event.subject, 'properties', 'takeable'])(state)) {
-        return select.add('$BUFFER', 'You can\'t take ' + event.subject + '.')(state);
+      if (!select([event.subject, 'properties', 'takeable']).get()(state)) {
+        return select('$BUFFER').add('You can\'t take ' + event.subject + '.')(state);
       }
 
       var newState = next(event, state);
@@ -30,7 +30,7 @@ exports.default = function (next, select) {
         return newState;
       }
 
-      var actions = (0, _util.compose)(select.remove('$LOCATION.items', event.subject), select.add('$INVENTORY', event.subject), select.add('$BUFFER', 'You take ' + event.subject));
+      var actions = (0, _util.compose)(select('$LOCATION.items').remove(event.subject), select('$INVENTORY').add(event.subject), select('$BUFFER').add('You take ' + event.subject));
 
       return actions(state);
     }

@@ -17,7 +17,7 @@ exports.default = function () {
     if (Array.isArray(selectors[key])) {
       return selectors[key].reduce(function (acc, i) {
         if (Array.isArray(i)) {
-          return [].concat(_toConsumableArray(acc), [get(i, event)(state)]);
+          return [].concat(_toConsumableArray(acc), [_get(i, event)(state)]);
         } else {
           return [].concat(_toConsumableArray(acc), _toConsumableArray(buildArray(i, state, event)));
         }
@@ -29,7 +29,7 @@ exports.default = function () {
     }
   };
 
-  var get = function get(inKeyArr, event) {
+  var _get = function _get(inKeyArr, event) {
     return function (state) {
       var keyArr = typeof inKeyArr === 'string' ? inKeyArr.split('.') : inKeyArr;
       var arr = keyArr.reduce(function (acc, i) {
@@ -39,7 +39,7 @@ exports.default = function () {
     };
   };
 
-  var set = function set(inKeyArr, value, event) {
+  var _set = function _set(inKeyArr, value, event) {
     return function (state) {
       var keyArr = typeof inKeyArr === 'string' ? inKeyArr.split('.') : inKeyArr;
       var arr = keyArr.reduce(function (acc, i) {
@@ -49,25 +49,38 @@ exports.default = function () {
     };
   };
 
-  var add = function add(keyArr, value, event) {
+  var _add = function _add(keyArr, value, event) {
     return function (state) {
-      var collection = get(keyArr, event)(state);
+      var collection = _get(keyArr, event)(state);
       var newCollection = collection.indexOf(value) > -1 ? collection : [value].concat(_toConsumableArray(collection));
-      return set(keyArr, newCollection, event)(state);
+      return _set(keyArr, newCollection, event)(state);
     };
   };
 
-  var remove = function remove(keyArr, value, event) {
+  var _remove = function _remove(keyArr, value, event) {
     return function (state) {
-      var collection = get(keyArr, event)(state);
+      var collection = _get(keyArr, event)(state);
       var newCollection = collection.filter(function (i) {
         return i !== value;
       });
-      return set(keyArr, newCollection, event)(state);
+      return _set(keyArr, newCollection, event)(state);
     };
   };
 
-  return {
-    get: get, set: set, add: add, remove: remove
+  return function (keyArr) {
+    return {
+      get: function get() {
+        return _get(keyArr);
+      },
+      set: function set(value) {
+        return _set(keyArr, value);
+      },
+      add: function add(value) {
+        return _add(keyArr, value);
+      },
+      remove: function remove(value) {
+        return _remove(keyArr, value);
+      }
+    };
   };
 };
