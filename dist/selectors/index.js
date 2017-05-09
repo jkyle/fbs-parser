@@ -29,8 +29,9 @@ exports.default = function () {
     }
   };
 
-  var get = function get(keyArr, event) {
+  var get = function get(inKeyArr, event) {
     return function (state) {
+      var keyArr = typeof inKeyArr === 'string' ? inKeyArr.split('.') : inKeyArr;
       var arr = keyArr.reduce(function (acc, i) {
         return [].concat(_toConsumableArray(acc), _toConsumableArray(buildArray(i, state, event)));
       }, []);
@@ -38,8 +39,9 @@ exports.default = function () {
     };
   };
 
-  var set = function set(keyArr, value, event) {
+  var set = function set(inKeyArr, value, event) {
     return function (state) {
+      var keyArr = typeof inKeyArr === 'string' ? inKeyArr.split('.') : inKeyArr;
       var arr = keyArr.reduce(function (acc, i) {
         return [].concat(_toConsumableArray(acc), _toConsumableArray(buildArray(i, state, event)));
       }, []);
