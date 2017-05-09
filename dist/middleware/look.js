@@ -11,17 +11,17 @@ exports.default = function (next, select) {
     if (originalEvent.type === 'LOOK') {
       var event = !originalEvent.subject ? _extends({}, originalEvent, { subject: state.location }) : originalEvent;
 
-      var here = select('$INVENTORY').get()(state).indexOf(event.subject) > -1 || select('$LOCATION.items').get()(state).indexOf(event.subject) > -1 || select('$LOCATION.exits').get()(state).indexOf(event.subject) > -1 || select('$GLOBAL.location').get()(state) === event.subject;
+      var here = select('$INVENTORY', state).get().indexOf(event.subject) > -1 || select('$LOCATION.items', state).get().indexOf(event.subject) > -1 || select('$LOCATION.exits', state).get().indexOf(event.subject) > -1 || select('$GLOBAL.location', state).get() === event.subject;
 
       if (!here) {
-        return select('$BUFFER').add("You don't see that here.")(state);
+        return select('$BUFFER', state).add("You don't see that here.");
       }
 
       var newState = next(event, state);
       if (newState !== state) {
         return newState;
       }
-      return select('$BUFFER').add('You see ' + event.subject + ', but it\'s not very interesting.')(state);
+      return select('$BUFFER', state).add('You see ' + event.subject + ', but it\'s not very interesting.');
     }
     return next(originalEvent, state);
   };

@@ -8,7 +8,7 @@ exports.default = function (next, select) {
   return function (event, state) {
     var newState = next(event, state);
     if (newState === state && event.type !== 'START') {
-      return select('$BUFFER').add("Nothing happens.")(state);
+      return select('$BUFFER', state).add("Nothing happens.");
     }
     return newState;
   };

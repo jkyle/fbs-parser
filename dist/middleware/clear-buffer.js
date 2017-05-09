@@ -6,6 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (next, select) {
   return function (event, state) {
-    return event.type === 'START' ? next(event, state) : next(event, select('$BUFFER').set([])(state));
+    return event.type === 'START' ? next(event, state) : next(event, select('$BUFFER', state).set([]));
   };
 };

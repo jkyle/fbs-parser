@@ -67,19 +67,19 @@ exports.default = function () {
     };
   };
 
-  return function (keyArr) {
+  return function (keyArr, state) {
     return {
       get: function get() {
-        return _get(keyArr);
+        return _get(keyArr)(state);
       },
       set: function set(value) {
-        return _set(keyArr, value);
+        return _set(keyArr, value)(state);
       },
       add: function add(value) {
-        return _add(keyArr, value);
+        return _add(keyArr, value)(state);
       },
       remove: function remove(value) {
-        return _remove(keyArr, value);
+        return _remove(keyArr, value)(state);
       }
     };
   };
