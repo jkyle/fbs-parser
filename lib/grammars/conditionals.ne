@@ -10,6 +10,7 @@ left -> game_object {% id %}
 #right -> ( primative | game_object ) {% d => d[0][0] %}
 
 right -> expression_or_primative {% id %}
+			 | "RAW$TARGET" {% d => ({type: 'RAW_TARGET'}) %}
 
 # Comparators
 comparator -> (eq | ne | lt | lte | gt | gte | has | lacks)

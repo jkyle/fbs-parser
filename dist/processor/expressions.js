@@ -30,7 +30,11 @@ var processOperand = function processOperand(operand) {
     return function (game, thisObj, targetObj) {
       return expressionFn(game, thisObj, targetObj);
     };
-  } else if (operand.type) {
+  } else if (operand.type && operand.type === 'RAW_TARGET') {
+    return function (game, thisObj, targetObj) {
+      return targetObj;
+    };
+  } else if (operand.type && operand.type) {
     var propfn = (0, _properties.getProperty)(operand);
     return function (game, thisObj, targetObj) {
       return propfn(game, thisObj, targetObj);

@@ -98,7 +98,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return d[0][0];
          } }, { "name": "plus", "symbols": [{ "literal": "+" }], "postprocess": id }, { "name": "minus", "symbols": [{ "literal": "-" }], "postprocess": id }, { "name": "mul", "symbols": [{ "literal": "*" }], "postprocess": id }, { "name": "div", "symbols": [{ "literal": "/" }], "postprocess": id }, { "name": "mod", "symbols": [{ "literal": "%" }], "postprocess": id }, { "name": "condition", "symbols": ["left", "_", "comparator", "_", "right"], "postprocess": function postprocess(d) {
             return { left: d[0], operator: d[2], right: d[4] };
-         } }, { "name": "left", "symbols": ["game_object"], "postprocess": id }, { "name": "right", "symbols": ["expression_or_primative"], "postprocess": id }, { "name": "comparator$subexpression$1", "symbols": ["eq"] }, { "name": "comparator$subexpression$1", "symbols": ["ne"] }, { "name": "comparator$subexpression$1", "symbols": ["lt"] }, { "name": "comparator$subexpression$1", "symbols": ["lte"] }, { "name": "comparator$subexpression$1", "symbols": ["gt"] }, { "name": "comparator$subexpression$1", "symbols": ["gte"] }, { "name": "comparator$subexpression$1", "symbols": ["has"] }, { "name": "comparator$subexpression$1", "symbols": ["lacks"] }, { "name": "comparator", "symbols": ["comparator$subexpression$1"], "postprocess": function postprocess(d) {
+         } }, { "name": "left", "symbols": ["game_object"], "postprocess": id }, { "name": "right", "symbols": ["expression_or_primative"], "postprocess": id }, { "name": "right$string$1", "symbols": [{ "literal": "R" }, { "literal": "A" }, { "literal": "W" }, { "literal": "$" }, { "literal": "T" }, { "literal": "A" }, { "literal": "R" }, { "literal": "G" }, { "literal": "E" }, { "literal": "T" }], "postprocess": function joiner(d) {
+            return d.join('');
+         } }, { "name": "right", "symbols": ["right$string$1"], "postprocess": function postprocess(d) {
+            return { type: 'RAW_TARGET' };
+         } }, { "name": "comparator$subexpression$1", "symbols": ["eq"] }, { "name": "comparator$subexpression$1", "symbols": ["ne"] }, { "name": "comparator$subexpression$1", "symbols": ["lt"] }, { "name": "comparator$subexpression$1", "symbols": ["lte"] }, { "name": "comparator$subexpression$1", "symbols": ["gt"] }, { "name": "comparator$subexpression$1", "symbols": ["gte"] }, { "name": "comparator$subexpression$1", "symbols": ["has"] }, { "name": "comparator$subexpression$1", "symbols": ["lacks"] }, { "name": "comparator", "symbols": ["comparator$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
          } }, { "name": "eq$subexpression$1", "symbols": [{ "literal": "=" }] }, { "name": "eq$subexpression$1$string$1", "symbols": [{ "literal": "=" }, { "literal": "=" }], "postprocess": function joiner(d) {
             return d.join('');
@@ -232,6 +236,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return d.join('');
          } }, { "name": "object_property", "symbols": ["object_property$string$1", "_", "expression", "__", { "literal": "}" }], "postprocess": function postprocess(d) {
             return d[2];
+         } }, { "name": "object_property$string$2", "symbols": [{ "literal": "{" }, { "literal": "@" }], "postprocess": function joiner(d) {
+            return d.join('');
+         } }, { "name": "object_property$string$3", "symbols": [{ "literal": "R" }, { "literal": "A" }, { "literal": "W" }, { "literal": "$" }, { "literal": "T" }, { "literal": "A" }, { "literal": "R" }, { "literal": "G" }, { "literal": "E" }, { "literal": "T" }], "postprocess": function joiner(d) {
+            return d.join('');
+         } }, { "name": "object_property", "symbols": ["object_property$string$2", "_", "object_property$string$3", "__", { "literal": "}" }], "postprocess": function postprocess(d) {
+            return { type: 'RAW_TARGET' };
          } }, { "name": "action", "symbols": [{ "literal": "-" }, "_", "game_object", "_", "operator", "_", "expression_or_primative"], "postprocess": function postprocess(d) {
             return { type: d[4], target: d[2], value: d[6] };
          } }, { "name": "action$ebnf$1$subexpression$1$string$1", "symbols": [{ "literal": "S" }, { "literal": "A" }, { "literal": "Y" }], "postprocess": function joiner(d) {

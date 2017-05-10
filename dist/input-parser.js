@@ -8,7 +8,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
-var prepositions = ['ON', 'IN', 'AT', 'TO'];
+var prepositions = ['ON', 'IN', 'INTO', 'AT', 'TO'];
 
 /* This is gross, but whatevs */
 

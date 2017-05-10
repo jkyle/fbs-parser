@@ -12,15 +12,6 @@ var _expressions2 = _interopRequireDefault(_expressions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var comparators = {
-  '===': function _(left, right) {
-    return left === right;
-  },
-  '>': function _(left, right) {
-    return left > right;
-  }
-};
-
 var conditionToken = function conditionToken(token) {
   var condition = token.condition,
       passage = token.passage;
@@ -40,6 +31,10 @@ var parseToken = function parseToken(token) {
   if (typeof token === 'string') {
     return function (game, thisObj, targetObj) {
       return token;
+    };
+  } else if (token.type === 'RAW_TARGET') {
+    return function (game, thisObj, targetObj) {
+      return targetObj;
     };
   } else if (token.type === 'condition') {
     var stringFn = conditionToken(token);
