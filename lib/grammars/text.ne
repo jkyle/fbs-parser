@@ -1,5 +1,5 @@
+@include "./expression.ne"
 @include "./conditionals.ne"
-@include "./game-objects.ne"
 @include "./primatives.ne"
 
 passage -> "\n":* paragraph ("\n" "\n":+ paragraph):* "\n":*
@@ -37,4 +37,4 @@ conditional -> conditional_start passage conditional_end
 conditional_start -> "{?" _ condition __ "}" {% d => d[2] %}
 conditional_end -> "{x}" {% id %}
 
-object_property -> "{@" _ game_object __ "}" {% d => d[2] %}
+object_property -> "{@" _ expression __ "}" {% d => d[2] %}

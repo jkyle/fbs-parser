@@ -230,7 +230,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return d.join('');
          } }, { "name": "conditional_end", "symbols": ["conditional_end$string$1"], "postprocess": id }, { "name": "object_property$string$1", "symbols": [{ "literal": "{" }, { "literal": "@" }], "postprocess": function joiner(d) {
             return d.join('');
-         } }, { "name": "object_property", "symbols": ["object_property$string$1", "_", "game_object", "__", { "literal": "}" }], "postprocess": function postprocess(d) {
+         } }, { "name": "object_property", "symbols": ["object_property$string$1", "_", "expression", "__", { "literal": "}" }], "postprocess": function postprocess(d) {
             return d[2];
          } }, { "name": "action", "symbols": [{ "literal": "-" }, "_", "game_object", "_", "operator", "_", "expression_or_primative"], "postprocess": function postprocess(d) {
             return { type: d[4], target: d[2], value: d[6] };

@@ -58,7 +58,6 @@ var parseFile = function parseFile(file) {
   return console.log(file) || fs.readFileAsync(file, 'utf8').then(function (result) {
     var p = new _nearley2.default.Parser(_fbsGrammar2.default.ParserRules, _fbsGrammar2.default.ParserStart);
     p.feed(result);
-    console.log(p.results[0].length);
     return p.results[0][0];
   }).catch(function (e) {
     return console.log('eer', e);

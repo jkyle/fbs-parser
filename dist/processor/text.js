@@ -1,12 +1,14 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _properties = require('./properties');
 
 var _conditionals = require('./conditionals');
 
 var _conditionals2 = _interopRequireDefault(_conditionals);
+
+var _expressions = require('./expressions');
+
+var _expressions2 = _interopRequireDefault(_expressions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17,15 +19,6 @@ var comparators = {
   '>': function _(left, right) {
     return left > right;
   }
-};
-
-var getValue = function getValue(item) {
-  if ((typeof item === 'undefined' ? 'undefined' : _typeof(item)) !== 'object') {
-    return function (game) {
-      return item.value;
-    };
-  }
-  return (0, _properties.getProperty)(item);
 };
 
 var conditionToken = function conditionToken(token) {
@@ -43,13 +36,6 @@ var conditionToken = function conditionToken(token) {
   };
 };
 
-var propertyToken = function propertyToken(token) {
-  var access = (0, _properties.getProperty)(token);
-  return function (game, thisObj, targetObj) {
-    return access(game, thisObj, targetObj);
-  };
-};
-
 var parseToken = function parseToken(token) {
   if (typeof token === 'string') {
     return function (game, thisObj, targetObj) {
@@ -62,7 +48,7 @@ var parseToken = function parseToken(token) {
     };
   } else {
     // Assume it's a game object?
-    var _stringFn = (0, _properties.getProperty)(token);
+    var _stringFn = (0, _expressions2.default)(token);
     return function (game, thisObj, targetObj) {
       return _stringFn(game, thisObj, targetObj);
     };

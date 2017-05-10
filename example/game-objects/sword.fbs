@@ -2,11 +2,11 @@
 
 START >>
 - $THIS.takeable <- true
-- $THIS.foo <- 6
-- $THIS.strength <- 5 * $THIS.foo
+- $THIS.strength <- 6
 
 LOOK >>
-- ((Wow. {? $THIS.strength < $THIS.foo * 6 }Cool!{x}))
+- ((Wow. {@ $THIS.strength} strength is so strong. If you
+    had six swords it'd be {@ $THIS.strength * 6}. Cool sword!))
 
 USE >>
 - ((You use {@ $THIS } on {@ $TARGET }. Good on you.))
