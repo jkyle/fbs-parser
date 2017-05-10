@@ -12,13 +12,19 @@ var _conditionals = require('./conditionals');
 
 var _conditionals2 = _interopRequireDefault(_conditionals);
 
+var _expressions = require('./expressions');
+
+var _expressions2 = _interopRequireDefault(_expressions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var processSet = function processSet(action) {
-  var setFn = (0, _properties.setProperty)(action.target, action.value);
+  var valueFn = (0, _expressions2.default)(action.value);
   return function (game, thisObj, targetObj) {
+    var value = valueFn(game, thisObj, targetObj);
+    var setFn = (0, _properties.setProperty)(action.target, value);
     return setFn(game, thisObj, targetObj);
   };
 };

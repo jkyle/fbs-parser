@@ -10,33 +10,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
    }
    var grammar = {
       Lexer: undefined,
-      ParserRules: [{ "name": "game_object", "symbols": ["name", "props"], "postprocess": function postprocess(d) {
-            return { type: "GAME_OBJECT", id: d[0], props: d[1] };
-         } }, { "name": "game_object", "symbols": [{ "literal": "$" }, "name", "props"], "postprocess": function postprocess(d) {
-            return { type: d[1], props: d[2] };
-         } }, { "name": "name$ebnf$1", "symbols": [/[A-Z]/] }, { "name": "name$ebnf$1", "symbols": ["name$ebnf$1", /[A-Z]/], "postprocess": function arrpush(d) {
-            return d[0].concat([d[1]]);
-         } }, { "name": "name", "symbols": ["name$ebnf$1"], "postprocess": function postprocess(d) {
-            return d[0].join('');
-         } }, { "name": "name$ebnf$2", "symbols": [/[A-Z ]/] }, { "name": "name$ebnf$2", "symbols": ["name$ebnf$2", /[A-Z ]/], "postprocess": function arrpush(d) {
-            return d[0].concat([d[1]]);
-         } }, { "name": "name", "symbols": [{ "literal": "<" }, "name$ebnf$2", { "literal": ">" }], "postprocess": function postprocess(d) {
-            return d[1].join('');
-         } }, { "name": "props$ebnf$1", "symbols": [] }, { "name": "props$ebnf$1$subexpression$1", "symbols": ["prop"] }, { "name": "props$ebnf$1$subexpression$1", "symbols": ["sProp"] }, { "name": "props$ebnf$1", "symbols": ["props$ebnf$1", "props$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
-            return d[0].concat([d[1]]);
-         } }, { "name": "props", "symbols": ["props$ebnf$1"], "postprocess": function postprocess(d) {
-            return d[0].map(function (e) {
-               return e[0];
-            });
-         } }, { "name": "prop$ebnf$1", "symbols": [/[a-zA-Z]/] }, { "name": "prop$ebnf$1", "symbols": ["prop$ebnf$1", /[a-zA-Z]/], "postprocess": function arrpush(d) {
-            return d[0].concat([d[1]]);
-         } }, { "name": "prop", "symbols": [{ "literal": "." }, "prop$ebnf$1"], "postprocess": function postprocess(d) {
-            return d[1].join('');
-         } }, { "name": "sProp$ebnf$1", "symbols": [/[a-zA-Z ]/] }, { "name": "sProp$ebnf$1", "symbols": ["sProp$ebnf$1", /[a-zA-Z ]/], "postprocess": function arrpush(d) {
-            return d[0].concat([d[1]]);
-         } }, { "name": "sProp", "symbols": [{ "literal": "." }, { "literal": "<" }, "sProp$ebnf$1", { "literal": ">" }], "postprocess": function postprocess(d) {
-            return d[2].join('');
-         } }, { "name": "primative$subexpression$1", "symbols": ["string"] }, { "name": "primative$subexpression$1", "symbols": ["number"] }, { "name": "primative$subexpression$1", "symbols": ["boolean"] }, { "name": "primative", "symbols": ["primative$subexpression$1"], "postprocess": function postprocess(d) {
+      ParserRules: [{ "name": "primative$subexpression$1", "symbols": ["string"] }, { "name": "primative$subexpression$1", "symbols": ["number"] }, { "name": "primative$subexpression$1", "symbols": ["boolean"] }, { "name": "primative", "symbols": ["primative$subexpression$1"], "postprocess": function postprocess(d) {
+            return d[0][0];
+         } }, { "name": "primative_no_num$subexpression$1", "symbols": ["string"] }, { "name": "primative_no_num$subexpression$1", "symbols": ["boolean"] }, { "name": "primative_no_num", "symbols": ["primative_no_num$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
          } }, { "name": "string$ebnf$1", "symbols": ["safechar"] }, { "name": "string$ebnf$1", "symbols": ["string$ebnf$1", "safechar"], "postprocess": function arrpush(d) {
             return d[0].concat([d[1]]);
@@ -82,11 +58,47 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return d[0].concat([d[1]]);
          } }, { "name": "__", "symbols": ["__$ebnf$1"], "postprocess": function postprocess(d) {
             return d[0].length ? ' ' : '';
-         } }, { "name": "condition", "symbols": ["left", "_", "comparator", "_", "right"], "postprocess": function postprocess(d) {
+         } }, { "name": "game_object", "symbols": ["name", "props"], "postprocess": function postprocess(d) {
+            return { type: "$GAME_OBJECT", id: d[0], props: d[1] };
+         } }, { "name": "game_object", "symbols": [{ "literal": "$" }, "name", "props"], "postprocess": function postprocess(d) {
+            return { type: "$" + d[1], props: d[2] };
+         } }, { "name": "name$ebnf$1", "symbols": [/[A-Z]/] }, { "name": "name$ebnf$1", "symbols": ["name$ebnf$1", /[A-Z]/], "postprocess": function arrpush(d) {
+            return d[0].concat([d[1]]);
+         } }, { "name": "name", "symbols": ["name$ebnf$1"], "postprocess": function postprocess(d) {
+            return d[0].join('');
+         } }, { "name": "name$ebnf$2", "symbols": [/[A-Z ]/] }, { "name": "name$ebnf$2", "symbols": ["name$ebnf$2", /[A-Z ]/], "postprocess": function arrpush(d) {
+            return d[0].concat([d[1]]);
+         } }, { "name": "name", "symbols": [{ "literal": "<" }, "name$ebnf$2", { "literal": ">" }], "postprocess": function postprocess(d) {
+            return d[1].join('');
+         } }, { "name": "props$ebnf$1", "symbols": [] }, { "name": "props$ebnf$1$subexpression$1", "symbols": ["prop"] }, { "name": "props$ebnf$1$subexpression$1", "symbols": ["sProp"] }, { "name": "props$ebnf$1", "symbols": ["props$ebnf$1", "props$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
+            return d[0].concat([d[1]]);
+         } }, { "name": "props", "symbols": ["props$ebnf$1"], "postprocess": function postprocess(d) {
+            return d[0].map(function (e) {
+               return e[0];
+            });
+         } }, { "name": "prop$ebnf$1", "symbols": [/[a-zA-Z]/] }, { "name": "prop$ebnf$1", "symbols": ["prop$ebnf$1", /[a-zA-Z]/], "postprocess": function arrpush(d) {
+            return d[0].concat([d[1]]);
+         } }, { "name": "prop", "symbols": [{ "literal": "." }, "prop$ebnf$1"], "postprocess": function postprocess(d) {
+            return d[1].join('');
+         } }, { "name": "sProp$ebnf$1", "symbols": [/[a-zA-Z ]/] }, { "name": "sProp$ebnf$1", "symbols": ["sProp$ebnf$1", /[a-zA-Z ]/], "postprocess": function arrpush(d) {
+            return d[0].concat([d[1]]);
+         } }, { "name": "sProp", "symbols": [{ "literal": "." }, { "literal": "<" }, "sProp$ebnf$1", { "literal": ">" }], "postprocess": function postprocess(d) {
+            return d[2].join('');
+         } }, { "name": "expression", "symbols": ["AddSub"], "postprocess": id }, { "name": "Paren", "symbols": [{ "literal": "(" }, "__", "AddSub", "__", { "literal": ")" }], "postprocess": function postprocess(d) {
+            return d[2];
+         } }, { "name": "Paren", "symbols": ["value"], "postprocess": id }, { "name": "MulDivMod", "symbols": ["MulDivMod", "__", "mulDivModOp", "__", "Paren"], "postprocess": function postprocess(d) {
             return { left: d[0], operator: d[2], right: d[4] };
-         } }, { "name": "left", "symbols": ["game_object"], "postprocess": id }, { "name": "right$subexpression$1", "symbols": ["primative"] }, { "name": "right$subexpression$1", "symbols": ["game_object"] }, { "name": "right", "symbols": ["right$subexpression$1"], "postprocess": function postprocess(d) {
+         } }, { "name": "MulDivMod", "symbols": ["Paren"], "postprocess": id }, { "name": "AddSub", "symbols": ["AddSub", "__", "addSubOp", "__", "MulDivMod"], "postprocess": function postprocess(d) {
+            return { left: d[0], operator: d[2], right: d[4] };
+         } }, { "name": "AddSub", "symbols": ["MulDivMod"], "postprocess": id }, { "name": "value$subexpression$1", "symbols": ["number"] }, { "name": "value$subexpression$1", "symbols": ["game_object"] }, { "name": "value", "symbols": ["value$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
-         } }, { "name": "comparator$subexpression$1", "symbols": ["eq"] }, { "name": "comparator$subexpression$1", "symbols": ["ne"] }, { "name": "comparator$subexpression$1", "symbols": ["lt"] }, { "name": "comparator$subexpression$1", "symbols": ["lte"] }, { "name": "comparator$subexpression$1", "symbols": ["gt"] }, { "name": "comparator$subexpression$1", "symbols": ["gte"] }, { "name": "comparator$subexpression$1", "symbols": ["has"] }, { "name": "comparator$subexpression$1", "symbols": ["lacks"] }, { "name": "comparator", "symbols": ["comparator$subexpression$1"], "postprocess": function postprocess(d) {
+         } }, { "name": "mulDivModOp$subexpression$1", "symbols": ["mul"] }, { "name": "mulDivModOp$subexpression$1", "symbols": ["div"] }, { "name": "mulDivModOp$subexpression$1", "symbols": ["mod"] }, { "name": "mulDivModOp", "symbols": ["mulDivModOp$subexpression$1"], "postprocess": function postprocess(d) {
+            return d[0][0];
+         } }, { "name": "addSubOp$subexpression$1", "symbols": ["plus"] }, { "name": "addSubOp$subexpression$1", "symbols": ["minus"] }, { "name": "addSubOp", "symbols": ["addSubOp$subexpression$1"], "postprocess": function postprocess(d) {
+            return d[0][0];
+         } }, { "name": "plus", "symbols": [{ "literal": "+" }], "postprocess": id }, { "name": "minus", "symbols": [{ "literal": "-" }], "postprocess": id }, { "name": "mul", "symbols": [{ "literal": "*" }], "postprocess": id }, { "name": "div", "symbols": [{ "literal": "/" }], "postprocess": id }, { "name": "mod", "symbols": [{ "literal": "%" }], "postprocess": id }, { "name": "condition", "symbols": ["left", "_", "comparator", "_", "right"], "postprocess": function postprocess(d) {
+            return { left: d[0], operator: d[2], right: d[4] };
+         } }, { "name": "left", "symbols": ["game_object"], "postprocess": id }, { "name": "right", "symbols": ["expression_or_primative"], "postprocess": id }, { "name": "comparator$subexpression$1", "symbols": ["eq"] }, { "name": "comparator$subexpression$1", "symbols": ["ne"] }, { "name": "comparator$subexpression$1", "symbols": ["lt"] }, { "name": "comparator$subexpression$1", "symbols": ["lte"] }, { "name": "comparator$subexpression$1", "symbols": ["gt"] }, { "name": "comparator$subexpression$1", "symbols": ["gte"] }, { "name": "comparator$subexpression$1", "symbols": ["has"] }, { "name": "comparator$subexpression$1", "symbols": ["lacks"] }, { "name": "comparator", "symbols": ["comparator$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
          } }, { "name": "eq$subexpression$1", "symbols": [{ "literal": "=" }] }, { "name": "eq$subexpression$1$string$1", "symbols": [{ "literal": "=" }, { "literal": "=" }], "postprocess": function joiner(d) {
             return d.join('');
@@ -220,7 +232,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return d.join('');
          } }, { "name": "object_property", "symbols": ["object_property$string$1", "_", "game_object", "__", { "literal": "}" }], "postprocess": function postprocess(d) {
             return d[2];
-         } }, { "name": "action", "symbols": [{ "literal": "-" }, "_", "game_object", "_", "operator", "_", "game_object_or_primative"], "postprocess": function postprocess(d) {
+         } }, { "name": "action", "symbols": [{ "literal": "-" }, "_", "game_object", "_", "operator", "_", "expression_or_primative"], "postprocess": function postprocess(d) {
             return { type: d[4], target: d[2], value: d[6] };
          } }, { "name": "action$ebnf$1$subexpression$1$string$1", "symbols": [{ "literal": "S" }, { "literal": "A" }, { "literal": "Y" }], "postprocess": function joiner(d) {
             return d.join('');
@@ -234,7 +246,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             return d.join('');
          } }, { "name": "action", "symbols": [{ "literal": "-" }, "_", "action$ebnf$1", "__", "action$string$1", "passage", "action$string$2"], "postprocess": function postprocess(d) {
             return { type: "say", passage: d[5] };
-         } }, { "name": "game_object_or_primative", "symbols": ["game_object"], "postprocess": id }, { "name": "game_object_or_primative", "symbols": ["primative"], "postprocess": id }, { "name": "operator$subexpression$1", "symbols": ["add"] }, { "name": "operator$subexpression$1", "symbols": ["remove"] }, { "name": "operator$subexpression$1", "symbols": ["set"] }, { "name": "operator", "symbols": ["operator$subexpression$1"], "postprocess": function postprocess(d) {
+         } }, { "name": "game_object_or_primative", "symbols": ["game_object"], "postprocess": id }, { "name": "game_object_or_primative", "symbols": ["primative"], "postprocess": id }, { "name": "expression_or_primative", "symbols": ["expression"], "postprocess": id }, { "name": "expression_or_primative", "symbols": ["primative_no_num"], "postprocess": id }, { "name": "operator$subexpression$1", "symbols": ["add"] }, { "name": "operator$subexpression$1", "symbols": ["remove"] }, { "name": "operator$subexpression$1", "symbols": ["set"] }, { "name": "operator", "symbols": ["operator$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
          } }, { "name": "add$string$1", "symbols": [{ "literal": "a" }, { "literal": "d" }, { "literal": "d" }], "postprocess": function joiner(d) {
             return d.join('');

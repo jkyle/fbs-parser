@@ -10,8 +10,9 @@ exports.default = function (next, select) {
   return function (originalEvent, state) {
     if (originalEvent.type === 'LOOK') {
       var event = !originalEvent.subject ? _extends({}, originalEvent, { subject: state.location }) : originalEvent;
+      var subject = event.subject;
 
-      var here = select('$INVENTORY', state).get().indexOf(event.subject) > -1 || select('$LOCATION.items', state).get().indexOf(event.subject) > -1 || select('$LOCATION.exits', state).get().indexOf(event.subject) > -1 || select('$GLOBAL.location', state).get() === event.subject;
+      var here = select('$INVENTORY', state).has(subject) || select('$LOCATION.items', state).has(subject) || select('$LOCATION.exits', state).has(subject) || select('$GLOBAL.location', state).get() === subject;
 
       if (!here) {
         return select('$BUFFER', state).add("You don't see that here.");
@@ -21,7 +22,7 @@ exports.default = function (next, select) {
       if (newState !== state) {
         return newState;
       }
-      return select('$BUFFER', state).add('You see ' + event.subject + ', but it\'s not very interesting.');
+      return select('$BUFFER', state).add('You see ' + subject + ', but it\'s not very interesting.');
     }
     return next(originalEvent, state);
   };

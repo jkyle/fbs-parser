@@ -1,12 +1,15 @@
-@include "./game-objects.ne"
 @include "./primatives.ne"
+@include "./game-objects.ne"
+@include "./expression.ne"
 
 # Conditional
 condition -> left _ comparator _ right
 	{% d => ({ left: d[0], operator: d[2], right: d[4] }) %}
 
-left -> game_object 							 {% id %}
-right -> (primative | game_object) {% d => d[0][0] %}
+left -> game_object {% id %}
+#right -> ( primative | game_object ) {% d => d[0][0] %}
+
+right -> expression_or_primative {% id %}
 
 # Comparators
 comparator -> (eq | ne | lt | lte | gt | gte | has | lacks)

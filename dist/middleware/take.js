@@ -4,25 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _location = require('../selectors/location');
-
-var _location2 = _interopRequireDefault(_location);
-
-var _util = require('../selectors/util');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _selectors = require('../selectors');
 
 exports.default = function (next, select) {
   return function (event, state) {
     if (event.type === 'TAKE') {
-      var atLocation = select('$LOCATION.items', state).get().indexOf(event.subject) > -1 || select('$LOCATION.exits', state).get().indexOf(event.subject) > -1;
+      var subject = event.subject;
+      var atLocation = select('$LOCATION.items', state).has(subject) || select('$LOCATION.exits', state).has(subject);
 
       if (!atLocation) {
-        return select('$BUFFER', state).add('There\'s no ' + event.subject + ' here.');
+        return select('$BUFFER', state).add('There\'s no ' + subject + ' here.');
       }
 
-      if (!select([event.subject, 'properties', 'takeable'], state).get()) {
-        return select('$BUFFER', state).add('You can\'t take ' + event.subject + '.');
+      var takeable = select([subject, 'properties', 'takeable'], state).get();
+      if (!takeable) {
+        return select('$BUFFER', state).add('You can\'t take ' + subject + '.');
       }
 
       var newState = next(event, state);
@@ -30,8 +26,16 @@ exports.default = function (next, select) {
         return newState;
       }
 
-      // I know, I know.
-      return select('$LOCATION.items', select('$INVENTORY', select('$BUFFER', state).add('You take ' + event.subject)).add(event.subject)).remove(event.subject);
+      var buffer = function buffer(newState) {
+        return select('$BUFFER', newState).add('You take ' + subject);
+      };
+      var inventory = function inventory(newState) {
+        return select('$INVENTORY', newState).add(subject);
+      };
+      var location = function location(newState) {
+        return select('$LOCATION.items', newState).remove(subject);
+      };
+      return (0, _selectors.compose)(buffer, inventory, location)(state);
     }
     return next(event, state);
   };

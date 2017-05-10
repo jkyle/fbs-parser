@@ -4,6 +4,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _properties = require('./properties');
 
+var _expressions = require('./expressions');
+
+var _expressions2 = _interopRequireDefault(_expressions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var comparators = {
   '===': function _(left, right) {
     return left === right;
@@ -49,7 +55,7 @@ var evaluateCondition = function evaluateCondition(condition) {
   } else {
     left = getValue(condition.left);
   }
-  right = getValue(condition.right);
+  right = (0, _expressions2.default)(condition.right);
   return function (game, thisObj, targetObj) {
     return comparators[operator](left(game, thisObj, targetObj), right(game, thisObj, targetObj));
   };

@@ -1,18 +1,21 @@
 @include "./text.ne"
-@include "./game-objects.ne"
 @include "./primatives.ne"
-
-# TODO Update primatives when game objects are done.
+@include "./expression.ne"
+@include "./game-objects.ne"
 
 # Actions
-action -> "-" _ game_object _ operator _ game_object_or_primative
+action -> "-" _ game_object _ operator _ expression_or_primative
 	{% d => ({type: d[4], target: d[2], value: d[6]}) %}
 
 action -> "-" _ ("SAY"|"say"):? __ "((" passage "))"
 	{% d =>  ({type: "say", passage: d[5]}) %}
 
 game_object_or_primative -> game_object {% id %}
-													| primative {% id %}
+   											 | primative {% id %}
+
+expression_or_primative -> expression {% id %}
+  											 | primative_no_num {% id %}
+
 
 #operators
 operator -> (add | remove | set) {% d => d[0][0] %}

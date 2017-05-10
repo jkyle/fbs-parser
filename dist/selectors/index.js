@@ -3,10 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.compose = exports.setPropertyForObject = exports.getPropertyFromObject = undefined;
 
 var _util = require('./util');
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+exports.getPropertyFromObject = _util.getPropertyFromObject;
+exports.setPropertyForObject = _util.setPropertyForObject;
+exports.compose = _util.compose;
 
 exports.default = function () {
   var initialSelectors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -67,6 +72,13 @@ exports.default = function () {
     };
   };
 
+  var _has = function _has(keyArr, value) {
+    return function (state) {
+      var collection = _get(keyArr)(state);
+      return collection.indexOf(value) > -1;
+    };
+  };
+
   return function (keyArr, state) {
     return {
       get: function get() {
@@ -80,6 +92,9 @@ exports.default = function () {
       },
       remove: function remove(value) {
         return _remove(keyArr, value)(state);
+      },
+      has: function has(value) {
+        return _has(keyArr, value)(state);
       }
     };
   };
