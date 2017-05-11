@@ -14,13 +14,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var conditionToken = function conditionToken(token) {
   var condition = token.condition,
-      passage = token.passage;
+      passage = token.passage,
+      elsePassage = token.elsePassage;
 
   var passageFn = parsePassage(passage);
   var conditionFn = (0, _conditionals2.default)(condition);
+  var elsePassageFn = elsePassage ? parsePassage(elsePassage) : null;
   return function (game, thisObj, targetObj) {
     if (conditionFn(game, thisObj, targetObj)) {
       return passageFn(game, thisObj, targetObj);
+    } else if (elsePassageFn) {
+      return elsePassageFn(game, thisObj, targetObj);
     } else {
       return '';
     }
