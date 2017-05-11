@@ -83,7 +83,7 @@ var buildState = function buildState(definition) {
     return _extends({}, acc, _defineProperty({}, item.id, { id: item.id, type: item.type, properties: {}, items: [], exits: [] }));
   }, {});
   var exe = definition.reduce(function (acc, item) {
-    return _extends({}, acc, _defineProperty({}, item.id, item.events));
+    return _extends({}, acc, _defineProperty({}, item.id, { events: item.events, props: item.props }));
   }, {});
 
   state.objects = stateObjects;

@@ -10,18 +10,30 @@ var _file = require('./file');
 
 var _file2 = _interopRequireDefault(_file);
 
+var _props2 = require('./props');
+
+var _props3 = _interopRequireDefault(_props2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 exports.default = function (program) {
   var exe = Object.keys(program).reduce(function (acc, key) {
-    return _extends({}, acc, _defineProperty({}, key, (0, _file2.default)(program[key])));
+    return _extends({}, acc, _defineProperty({}, key, (0, _file2.default)(program[key].events)));
   }, {});
-  return function (next) {
-    return function (event, state) {
-      var legitEvent = exe[event.subject] && exe[event.subject][event.type];
-      return next(event, legitEvent ? legitEvent(state, event.subject, event.target) : state);
-    };
+  var _props = Object.keys(program).reduce(function (acc, key) {
+    return _extends({}, acc, _defineProperty({}, key, program[key].props));
+  }, {});
+  return {
+    middleware: function middleware(next) {
+      return function (event, state) {
+        var legitEvent = exe[event.subject] && exe[event.subject][event.type];
+        return next(event, legitEvent ? legitEvent(state, event.subject, event.target) : state);
+      };
+    },
+    props: function props(item, prop, state) {
+      return _props[item] && _props[item][prop] ? (0, _props3.default)(_props[item][prop], state) : undefined;
+    }
   };
 };

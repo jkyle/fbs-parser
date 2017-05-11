@@ -1,5 +1,7 @@
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 // Generated automatically by nearley
@@ -90,7 +92,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 return { left: d[0], operator: d[2], right: d[4] };
             } }, { "name": "MulDivMod", "symbols": ["Paren"], "postprocess": id }, { "name": "AddSub", "symbols": ["AddSub", "__", "addSubOp", "__", "MulDivMod"], "postprocess": function postprocess(d) {
                 return { left: d[0], operator: d[2], right: d[4] };
-            } }, { "name": "AddSub", "symbols": ["MulDivMod"], "postprocess": id }, { "name": "value$subexpression$1", "symbols": ["number"] }, { "name": "value$subexpression$1", "symbols": ["game_object"] }, { "name": "value", "symbols": ["value$subexpression$1"], "postprocess": function postprocess(d) {
+            } }, { "name": "AddSub", "symbols": ["MulDivMod"], "postprocess": id }, { "name": "value$subexpression$1", "symbols": ["number"] }, { "name": "value$subexpression$1", "symbols": ["game_object"] }, { "name": "value$subexpression$1", "symbols": ["string"] }, { "name": "value", "symbols": ["value$subexpression$1"], "postprocess": function postprocess(d) {
                 return d[0][0];
             } }, { "name": "mulDivModOp$subexpression$1", "symbols": ["mul"] }, { "name": "mulDivModOp$subexpression$1", "symbols": ["div"] }, { "name": "mulDivModOp$subexpression$1", "symbols": ["mod"] }, { "name": "mulDivModOp", "symbols": ["mulDivModOp$subexpression$1"], "postprocess": function postprocess(d) {
                 return d[0][0];
@@ -306,14 +308,22 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 return d[0][0];
             } }, { "name": "doable", "symbols": ["comment"], "postprocess": function postprocess(d) {
                 return null;
+            } }, { "name": "computed_prop$string$1", "symbols": [{ "literal": "(" }, { "literal": "(" }], "postprocess": function joiner(d) {
+                return d.join('');
+            } }, { "name": "computed_prop$string$2", "symbols": [{ "literal": ")" }, { "literal": ")" }], "postprocess": function joiner(d) {
+                return d.join('');
+            } }, { "name": "computed_prop", "symbols": [{ "literal": ":" }, "props", "__", "computed_prop$string$1", "passage", "computed_prop$string$2"], "postprocess": function postprocess(d) {
+                return _defineProperty({}, d[1][0], d[4]);
             } }, { "name": "files$ebnf$1", "symbols": ["file"] }, { "name": "files$ebnf$1", "symbols": ["files$ebnf$1", "file"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
             } }, { "name": "files", "symbols": ["files$ebnf$1"], "postprocess": id }, { "name": "file$ebnf$1$subexpression$1", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$1", "symbols": ["file$ebnf$1$subexpression$1"] }, { "name": "file$ebnf$1$subexpression$2", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$1", "symbols": ["file$ebnf$1", "file$ebnf$1$subexpression$2"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "file$ebnf$2", "symbols": [] }, { "name": "file$ebnf$2$subexpression$1", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$2", "symbols": ["file$ebnf$2", "file$ebnf$2$subexpression$1"], "postprocess": function arrpush(d) {
+            } }, { "name": "file$ebnf$2$subexpression$1", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$2", "symbols": ["file$ebnf$2$subexpression$1"] }, { "name": "file$ebnf$2$subexpression$2", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$2", "symbols": ["file$ebnf$2", "file$ebnf$2$subexpression$2"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "file", "symbols": ["fileType", { "literal": " " }, "fileName", "file$ebnf$1", "events", "file$ebnf$2"], "postprocess": function postprocess(d) {
-                return { type: d[0], id: d[2], events: d[4] };
+            } }, { "name": "file$ebnf$3", "symbols": [] }, { "name": "file$ebnf$3$subexpression$1", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$3", "symbols": ["file$ebnf$3", "file$ebnf$3$subexpression$1"], "postprocess": function arrpush(d) {
+                return d[0].concat([d[1]]);
+            } }, { "name": "file", "symbols": ["fileType", { "literal": " " }, "fileName", "file$ebnf$1", "computed_props", "file$ebnf$2", "events", "file$ebnf$3"], "postprocess": function postprocess(d) {
+                return { type: d[0], id: d[2], props: d[4], events: d[6] };
             } }, { "name": "fileType$subexpression$1$string$1", "symbols": [{ "literal": "I" }, { "literal": "T" }, { "literal": "E" }, { "literal": "M" }], "postprocess": function joiner(d) {
                 return d.join('');
             } }, { "name": "fileType$subexpression$1", "symbols": ["fileType$subexpression$1$string$1"] }, { "name": "fileType$subexpression$1$string$2", "symbols": [{ "literal": "L" }, { "literal": "O" }, { "literal": "C" }, { "literal": "A" }, { "literal": "T" }, { "literal": "I" }, { "literal": "O" }, { "literal": "N" }], "postprocess": function joiner(d) {
@@ -336,6 +346,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 return [d[0].join('')].concat(_toConsumableArray(d[1].map(function (e) {
                     return e[1].join('');
                 }))).join(' ');
+            } }, { "name": "computed_props", "symbols": [] }, { "name": "computed_props$ebnf$1", "symbols": [] }, { "name": "computed_props$ebnf$1$subexpression$1", "symbols": [{ "literal": "\n" }, "computed_prop"] }, { "name": "computed_props$ebnf$1", "symbols": ["computed_props$ebnf$1", "computed_props$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
+                return d[0].concat([d[1]]);
+            } }, { "name": "computed_props", "symbols": ["computed_prop", "computed_props$ebnf$1"], "postprocess": function postprocess(d) {
+                return Object.assign({}, d[0], d[1].reduce(function (acc, e) {
+                    return Object.assign(acc, e[2]);
+                }, {}));
             } }, { "name": "events$ebnf$1", "symbols": [] }, { "name": "events$ebnf$1$subexpression$1$ebnf$1", "symbols": [{ "literal": "\n" }] }, { "name": "events$ebnf$1$subexpression$1$ebnf$1", "symbols": ["events$ebnf$1$subexpression$1$ebnf$1", { "literal": "\n" }], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
             } }, { "name": "events$ebnf$1$subexpression$1", "symbols": [{ "literal": "\n" }, "events$ebnf$1$subexpression$1$ebnf$1", "event_block"] }, { "name": "events$ebnf$1", "symbols": ["events$ebnf$1", "events$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
