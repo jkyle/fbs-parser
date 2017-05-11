@@ -39,8 +39,11 @@ var processSay = function processSay(action) {
 var processCondition = function processCondition(action) {
   var conditionFn = (0, _conditionals2.default)(action.condition);
   var actions = processActions(action.actions);
+  var elseActions = action.elseActions ? processActions(action.elseActions) : null;
   return function (game, thisObj, targetObj) {
     return conditionFn(game, thisObj, targetObj) ? actions.reduce(function (acc, actionFn) {
+      return actionFn(acc, thisObj, targetObj);
+    }, game) : elseActions ? elseActions.reduce(function (acc, actionFn) {
       return actionFn(acc, thisObj, targetObj);
     }, game) : game;
   };

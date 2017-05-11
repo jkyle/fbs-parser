@@ -3,10 +3,16 @@
 START >>
 - ARENA add SWORD
 - ARENA add ARMORY
+? ARENA has SWORD
+  - ((Yo. Swoard here.))
+~
+  - ((No here.))
+x
 
 LOOK >>
 - ((  Hey, cool arena.
-     {? ARENA has SWORD } This arena could use a sword.{x}
+     {? ARENA has SWORD } This arena could use a sword.{~}
+     Or not, you know.{x}
 
      You're a rad dude.))
 

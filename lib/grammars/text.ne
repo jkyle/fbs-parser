@@ -31,11 +31,12 @@ sp_token -> __ (condition_token | string_token | property_token)
 	{% d => [d[0], ...d[1][0]] %}
 
 safeToken -> safechar_no_ws:+ {% d=> d[0].join('') %}
-conditional -> conditional_start passage conditional_end
-	{% d => ({ type: 'condition', condition: d[0], passage: d[1]}) %}
+conditional -> conditional_start passage (condition_else passage):? conditional_end
+	{% d => ({ type: 'condition', condition: d[0], passage: d[1], elsePassage: d[2] ? d[2][1] : null }) %}
 
 conditional_start -> "{?" _ condition __ "}" {% d => d[2] %}
 conditional_end -> "{x}" {% id %}
+condition_else -> "{~}" {% id %}
 
 object_property -> "{@" _ expression __ "}" {% d => d[2] %}
 								 | "{@" _ "RAW$TARGET" __ "}" {% d => ({ type: 'RAW_TARGET' }) %}
