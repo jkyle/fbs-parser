@@ -1,3 +1,7 @@
+comment -> "#" commentchars
+commentchars -> null
+              | commentchars [^\n]
+
 primative -> (string | number | boolean) {% d => d[0][0] %}
 primative_no_num -> (string | boolean) {% d => d[0][0] %}
 # string

@@ -3,7 +3,8 @@
 @include "./primatives.ne"
 
 event_block -> __ method ("\n" __ doable):+
-	{% d => ({ method: d[1], actions: d[2].map(e => e[2])}) %}
+	{% d => ({ method: d[1], actions: d[2].map(e => e[2]).filter(e => e)}) %}
+						 | comment {% d => null %}
 
 method -> [A-Z]:+ _ ">>"
 	{% d => d[0].join('') %}
@@ -15,3 +16,4 @@ condition_start -> "?"
 condition_end -> "x"
 
 doable -> (action | condition_block) {% d => d[0][0] %}
+				| comment {% d => null %}

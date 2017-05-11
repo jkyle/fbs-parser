@@ -10,7 +10,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
    }
    var grammar = {
       Lexer: undefined,
-      ParserRules: [{ "name": "primative$subexpression$1", "symbols": ["string"] }, { "name": "primative$subexpression$1", "symbols": ["number"] }, { "name": "primative$subexpression$1", "symbols": ["boolean"] }, { "name": "primative", "symbols": ["primative$subexpression$1"], "postprocess": function postprocess(d) {
+      ParserRules: [{ "name": "comment", "symbols": [{ "literal": "#" }, "commentchars"] }, { "name": "commentchars", "symbols": [] }, { "name": "commentchars", "symbols": ["commentchars", /[^\n]/] }, { "name": "primative$subexpression$1", "symbols": ["string"] }, { "name": "primative$subexpression$1", "symbols": ["number"] }, { "name": "primative$subexpression$1", "symbols": ["boolean"] }, { "name": "primative", "symbols": ["primative$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
          } }, { "name": "primative_no_num$subexpression$1", "symbols": ["string"] }, { "name": "primative_no_num$subexpression$1", "symbols": ["boolean"] }, { "name": "primative_no_num", "symbols": ["primative_no_num$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
@@ -271,7 +271,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
          } }, { "name": "event_block", "symbols": ["__", "method", "event_block$ebnf$1"], "postprocess": function postprocess(d) {
             return { method: d[1], actions: d[2].map(function (e) {
                   return e[2];
+               }).filter(function (e) {
+                  return e;
                }) };
+         } }, { "name": "event_block", "symbols": ["comment"], "postprocess": function postprocess(d) {
+            return null;
          } }, { "name": "method$ebnf$1", "symbols": [/[A-Z]/] }, { "name": "method$ebnf$1", "symbols": ["method$ebnf$1", /[A-Z]/], "postprocess": function arrpush(d) {
             return d[0].concat([d[1]]);
          } }, { "name": "method$string$1", "symbols": [{ "literal": ">" }, { "literal": ">" }], "postprocess": function joiner(d) {
@@ -286,6 +290,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                }) };
          } }, { "name": "condition_start", "symbols": [{ "literal": "?" }] }, { "name": "condition_end", "symbols": [{ "literal": "x" }] }, { "name": "doable$subexpression$1", "symbols": ["action"] }, { "name": "doable$subexpression$1", "symbols": ["condition_block"] }, { "name": "doable", "symbols": ["doable$subexpression$1"], "postprocess": function postprocess(d) {
             return d[0][0];
+         } }, { "name": "doable", "symbols": ["comment"], "postprocess": function postprocess(d) {
+            return null;
          } }, { "name": "files$ebnf$1", "symbols": ["file"] }, { "name": "files$ebnf$1", "symbols": ["files$ebnf$1", "file"], "postprocess": function arrpush(d) {
             return d[0].concat([d[1]]);
          } }, { "name": "files", "symbols": ["files$ebnf$1"], "postprocess": id }, { "name": "file$ebnf$1$subexpression$1", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$1", "symbols": ["file$ebnf$1$subexpression$1"] }, { "name": "file$ebnf$1$subexpression$2", "symbols": [{ "literal": "\n" }] }, { "name": "file$ebnf$1", "symbols": ["file$ebnf$1", "file$ebnf$1$subexpression$2"], "postprocess": function arrpush(d) {
@@ -323,6 +329,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
          } }, { "name": "events", "symbols": ["event_block", "events$ebnf$1"], "postprocess": function postprocess(d) {
             return [d[0]].concat(_toConsumableArray(d[1].map(function (e) {
                return e[2];
+            }).filter(function (e) {
+               return e;
             })));
          } }],
       ParserStart: "files"

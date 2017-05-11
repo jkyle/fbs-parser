@@ -124,6 +124,9 @@ const game = createGame( Object.assign({}, initialState, { location: 'WHATEVER' 
 
 # TODO
 
-* [ ] Math Expressions
+* [x] Math Expressions
 * [x] USE event with $TARGET
 * [x] Selectors/Utilities
+* [ ] Else conditional
+* [ ] comments
+* [ ] computed properties
