@@ -1,6 +1,7 @@
 @LOCATION ARENA
 
 :.backgroundColor (( {? ARENA has SWORD} #456456 {~} #666999 {x} ))
+:.textColor ((#56A653))
 
 START >>
 - ARENA add SWORD

@@ -350,7 +350,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 return d[0].concat([d[1]]);
             } }, { "name": "computed_props", "symbols": ["computed_prop", "computed_props$ebnf$1"], "postprocess": function postprocess(d) {
                 return Object.assign({}, d[0], d[1].reduce(function (acc, e) {
-                    return Object.assign(acc, e[2]);
+                    return Object.assign({}, acc, e[1]);
                 }, {}));
             } }, { "name": "events$ebnf$1", "symbols": [] }, { "name": "events$ebnf$1$subexpression$1$ebnf$1", "symbols": [{ "literal": "\n" }] }, { "name": "events$ebnf$1$subexpression$1$ebnf$1", "symbols": ["events$ebnf$1$subexpression$1$ebnf$1", { "literal": "\n" }], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);

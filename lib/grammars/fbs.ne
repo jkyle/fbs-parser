@@ -15,7 +15,7 @@ fileName -> [A-Z]:+ (" " [A-Z]:+):*
 
 computed_props -> null
                 | computed_prop ("\n" computed_prop):*
-                {% d => Object.assign({}, d[0], d[1].reduce((acc, e) => Object.assign(acc, e[2]), {})) %}
+                {% d => Object.assign({}, d[0], d[1].reduce((acc, e) => Object.assign({}, acc, e[1]), {})) %}
 
 events -> event_block ("\n" "\n":+ event_block):*
 	{% d => [d[0], ...d[1].map(e => e[2]).filter(e => e)] %}

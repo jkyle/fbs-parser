@@ -11,9 +11,11 @@ const game = createGame(
   [...defaultMiddleware, middleware]
 );
 game.dispatch('start')
+console.log(props('ARENA', 'backgroundColor', game.getState()))
 game.subscribe(state => {console.log(state.buffer.join('\n'))})
 game.dispatch('look')
 game.dispatch('take sword')
+console.log(props('ARENA', 'textColor', game.getState()))
 game.dispatch('look sword')
 game.dispatch('use sword on arena')
 game.dispatch('go armory')
