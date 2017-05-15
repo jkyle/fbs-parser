@@ -127,6 +127,8 @@ const game = createGame( Object.assign({}, initialState, { location: 'WHATEVER' 
 * [x] Math Expressions
 * [x] USE event with $TARGET
 * [x] Selectors/Utilities
-* [ ] Else conditional
-* [ ] comments
-* [ ] computed properties
+* [x] Else conditional
+* [x] comments
+* [X] computed properties
+* [ ] Name-spaced items (so multiple locations can have the same kind of item)
+* [ ] Exit entities -> So you can have a "DOOR" as an exit opposed to just listing the name of the location

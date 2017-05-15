@@ -56,8 +56,8 @@ var evaluateCondition = function evaluateCondition(condition) {
     left = getValue(condition.left);
   }
   right = (0, _expressions2.default)(condition.right);
-  return function (game, thisObj, targetObj) {
-    return comparators[operator](left(game, thisObj, targetObj), right(game, thisObj, targetObj));
+  return function (game, select, thisObj, targetObj) {
+    return comparators[operator](left(game, select, thisObj, targetObj), right(game, select, thisObj, targetObj));
   };
 };
 

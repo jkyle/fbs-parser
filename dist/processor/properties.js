@@ -56,7 +56,7 @@ var setPropertyForObject = function setPropertyForObject(object, _ref, value) {
 };
 
 var getPropsArray = function getPropsArray(id, props, getItems) {
-  return props.length > 0 ? ['objects', id, 'properties'].concat(_toConsumableArray(props)) : getItems ? ['objects', id, 'items'] : ['objects', id, 'id'];
+  return props.length > 0 ? ['objects', id].concat(_toConsumableArray(props)) : getItems ? ['objects', id, 'items'] : ['objects', id, 'id'];
 };
 
 module.exports = {
@@ -64,7 +64,7 @@ module.exports = {
     var type = _ref3.type,
         id = _ref3.id,
         props = _ref3.props;
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       var objectLocation = type === '$GAME_OBJECT' ? getPropsArray(id, props, getItems) : type === '$INVENTORY' ? getPropsArray('PLAYER', [], true) : type === '$LOCATION' ? getPropsArray(game.location, props, getItems) : type === '$THIS' ? getPropsArray(thisObj, props, getItems) : type === '$TARGET' ? getPropsArray(targetObj, props, getItems) : [];
       return getPropertyFromObject(game, objectLocation);
     };
@@ -73,14 +73,14 @@ module.exports = {
     var type = _ref4.type,
         id = _ref4.id,
         props = _ref4.props;
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       // console.log(thisObj);
       var objectLocation = type === '$GAME_OBJECT' ? getPropsArray(id, props, setItems) : type === '$INVENTORY' ? getPropsArray('PLAYER', [], true) : type === '$LOCATION' ? getPropsArray(game.location, props, setItems) : type === '$THIS' ? getPropsArray(thisObj, props, setItems) : type === '$TARGET' ? getPropsArray(targetObj, props, setItems) : [];
       return setPropertyForObject(game, objectLocation, value);
     };
   },
   addItem: function addItem(object, item) {
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       // CUSTOM HANDLING FOR TYPES
       var id = object.type === '$INVENTORY' ? 'PLAYER' : object.type === '$LOCATION' ? game.locaction : object.type === '$THIS' ? thisObj : object.type === '$TARGET' ? targetObj : object.id;
       var itemId = item.type === '$INVENTORY' ? 'PLAYER' : item.type === '$LOCATION' ? game.locaction : item.type === '$THIS' ? thisObj : item.type === '$TARGET' ? targetObj : item.id;
@@ -88,12 +88,12 @@ module.exports = {
     };
   },
   addExit: function addExit(location, destination) {
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       return addExitToObject(game, location.id, destination.id);
     };
   },
   removeItem: function removeItem(object, item) {
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       var id = object.type === '$INVENTORY' ? 'PLAYER' : object.type === '$LOCATION' ? game.location : object.type === '$THIS' ? thisObj : object.type === '$TARGET' ? targetObj : object.id;
 
       var itemId = item.type === '$INVENTORY' ? 'PLAYER' : item.type === '$LOCATION' ? game.location : item.type === '$THIS' ? thisObj : item.type === '$TARGET' ? targetObj : item.id;

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel lib/bin --out-dir bin && babel lib/src --out-dir dist",
     "compile": "nearleyc lib/grammars/fbs.ne -o lib/bin/fbs-grammar.js",
-    "short": "npm run compile && npm run build",
+    "fbs": "node ./bin/fbs.js -i example/game-objects -o example/build",
+    "short": "npm run compile && npm run build && npm run fbs",
     "test": "echo \"lol\" && exit 1"
   },
   "bin": {

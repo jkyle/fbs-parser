@@ -27,17 +27,17 @@ var operators = {
 var processOperand = function processOperand(operand) {
   if (operand.operator) {
     var expressionFn = processExpression(operand);
-    return function (game, thisObj, targetObj) {
-      return expressionFn(game, thisObj, targetObj);
+    return function (game, select, thisObj, targetObj) {
+      return expressionFn(game, select, thisObj, targetObj);
     };
   } else if (operand.type && operand.type === 'RAW_TARGET') {
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       return targetObj;
     };
   } else if (operand.type && operand.type) {
     var propfn = (0, _properties.getProperty)(operand);
-    return function (game, thisObj, targetObj) {
-      return propfn(game, thisObj, targetObj);
+    return function (game, select, thisObj, targetObj) {
+      return propfn(game, select, thisObj, targetObj);
     };
   } else {
     return function () {
@@ -53,9 +53,9 @@ var processExpression = function processExpression(expression) {
 
   var leftFn = processOperand(left);
   var rightFn = processOperand(right);
-  return function (game, thisObj, targetObj) {
-    var l = leftFn(game, thisObj, targetObj);
-    var r = rightFn(game, thisObj, targetObj);
+  return function (game, select, thisObj, targetObj) {
+    var l = leftFn(game, select, thisObj, targetObj);
+    var r = rightFn(game, select, thisObj, targetObj);
     return operators[operator](l, r);
   };
 };

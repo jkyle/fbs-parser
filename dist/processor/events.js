@@ -1,7 +1,5 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _properties = require('./properties');
 
 var _text = require('./text');
@@ -22,17 +20,20 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var processSet = function processSet(action) {
   var valueFn = (0, _expressions2.default)(action.value);
-  return function (game, thisObj, targetObj) {
-    var value = valueFn(game, thisObj, targetObj);
-    var setFn = (0, _properties.setProperty)(action.target, value);
-    return setFn(game, thisObj, targetObj);
+  return function (game, select, thisObj, targetObj) {
+    var value = valueFn(game, select, thisObj, targetObj);
+    // const setFn = setProperty(action.target, value)
+    // return setFn(game, select, thisObj, targetObj)
+    var targetArr = action.target.type === '$GAME_OBJECT' ? [action.target.id].concat(_toConsumableArray(action.target.props)) : action.target.type;
+    console.log(targetArr, value);
+    return select(targetArr, game).set(value);
   };
 };
 
 var processSay = function processSay(action) {
   var sayFn = (0, _text2.default)(action.passage);
-  return function (game, thisObj, targetObj) {
-    return _extends({}, game, { buffer: [sayFn(game, thisObj, targetObj)].concat(_toConsumableArray(game.buffer)) });
+  return function (game, select, thisObj, targetObj) {
+    return select('$BUFFER', game).add(sayFn(game, select, thisObj, targetObj));
   };
 };
 
@@ -40,26 +41,26 @@ var processCondition = function processCondition(action) {
   var conditionFn = (0, _conditionals2.default)(action.condition);
   var actions = processActions(action.actions);
   var elseActions = action.elseActions ? processActions(action.elseActions) : null;
-  return function (game, thisObj, targetObj) {
-    return conditionFn(game, thisObj, targetObj) ? actions.reduce(function (acc, actionFn) {
-      return actionFn(acc, thisObj, targetObj);
+  return function (game, select, thisObj, targetObj) {
+    return conditionFn(game, select, thisObj, targetObj) ? actions.reduce(function (acc, actionFn) {
+      return actionFn(acc, select, thisObj, targetObj);
     }, game) : elseActions ? elseActions.reduce(function (acc, actionFn) {
-      return actionFn(acc, thisObj, targetObj);
+      return actionFn(acc, select, thisObj, targetObj);
     }, game) : game;
   };
 };
 
 var processAdd = function processAdd(action) {
   var addFn = (0, _properties.addItem)(action.target, action.value);
-  return function (game, thisObj, targetObj) {
-    return addFn(game, thisObj, targetObj);
+  return function (game, select, thisObj, targetObj) {
+    return addFn(game, select, thisObj, targetObj);
   };
 };
 
 var processRemove = function processRemove(action) {
   var addFn = (0, _properties.removeItem)(action.target, action.value);
-  return function (game, thisObj, targetObj) {
-    return addFn(game, thisObj, targetObj);
+  return function (game, select, thisObj, targetObj) {
+    return addFn(game, select, thisObj, targetObj);
   };
 };
 
@@ -73,8 +74,8 @@ var actions = {
 
 var processAction = function processAction(action) {
   var actionFn = actions[action.type](action);
-  return function (game, thisObj, targetObj) {
-    return actionFn(game, thisObj, targetObj);
+  return function (game, select, thisObj, targetObj) {
+    return actionFn(game, select, thisObj, targetObj);
   };
 };
 
@@ -84,9 +85,9 @@ var processActions = function processActions(actions) {
 
 module.exports = function (event) {
   var actions = processActions(event.actions);
-  return function (game, thisObj, targetObj) {
+  return function (game, select, thisObj, targetObj) {
     return actions.reduce(function (acc, actionFn) {
-      return actionFn(acc, thisObj, targetObj);
+      return actionFn(acc, select, thisObj, targetObj);
     }, game);
   };
 };

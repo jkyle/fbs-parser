@@ -26,10 +26,10 @@ exports.default = function (program) {
     return _extends({}, acc, _defineProperty({}, key, program[key].props));
   }, {});
   return {
-    middleware: function middleware(next) {
+    middleware: function middleware(next, select) {
       return function (event, state) {
         var legitEvent = exe[event.subject] && exe[event.subject][event.type];
-        return next(event, legitEvent ? legitEvent(state, event.subject, event.target) : state);
+        return next(event, legitEvent ? legitEvent(state, select, event.subject, event.target) : state);
       };
     },
     props: function props(item, prop, state) {

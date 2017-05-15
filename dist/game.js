@@ -37,7 +37,7 @@ var composeMiddleware = function composeMiddleware() {
     return function () {
       return fn(acc.apply(undefined, arguments), select);
     };
-  })(noop) : noop;
+  })(noop, select) : noop;
 };
 
 exports.default = function (initialState, middleware) {

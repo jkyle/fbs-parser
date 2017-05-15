@@ -20,11 +20,11 @@ var conditionToken = function conditionToken(token) {
   var passageFn = parsePassage(passage);
   var conditionFn = (0, _conditionals2.default)(condition);
   var elsePassageFn = elsePassage ? parsePassage(elsePassage) : null;
-  return function (game, thisObj, targetObj) {
-    if (conditionFn(game, thisObj, targetObj)) {
-      return passageFn(game, thisObj, targetObj);
+  return function (game, select, thisObj, targetObj) {
+    if (conditionFn(game, select, thisObj, targetObj)) {
+      return passageFn(game, select, thisObj, targetObj);
     } else if (elsePassageFn) {
-      return elsePassageFn(game, thisObj, targetObj);
+      return elsePassageFn(game, select, thisObj, targetObj);
     } else {
       return '';
     }
@@ -33,32 +33,32 @@ var conditionToken = function conditionToken(token) {
 
 var parseToken = function parseToken(token) {
   if (typeof token === 'string') {
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       return token;
     };
   } else if (token.type === 'RAW_TARGET') {
-    return function (game, thisObj, targetObj) {
+    return function (game, select, thisObj, targetObj) {
       return targetObj;
     };
   } else if (token.type === 'condition') {
     var stringFn = conditionToken(token);
-    return function (game, thisObj, targetObj) {
-      return stringFn(game, thisObj, targetObj);
+    return function (game, select, thisObj, targetObj) {
+      return stringFn(game, select, thisObj, targetObj);
     };
   } else {
     // Assume it's a game object?
     var _stringFn = (0, _expressions2.default)(token);
-    return function (game, thisObj, targetObj) {
-      return _stringFn(game, thisObj, targetObj);
+    return function (game, select, thisObj, targetObj) {
+      return _stringFn(game, select, thisObj, targetObj);
     };
   }
 };
 
 var parseLine = function parseLine(line) {
   var tokens = line.tokens.map(parseToken);
-  return function (game, thisObj, targetObj) {
+  return function (game, select, thisObj, targetObj) {
     return tokens.map(function (t) {
-      return t(game, thisObj, targetObj);
+      return t(game, select, thisObj, targetObj);
     }).join('');
   };
 };
@@ -66,9 +66,9 @@ var parseLine = function parseLine(line) {
 var parseParagraph = function parseParagraph(paragraph) {
   var lines = paragraph.lines.map(parseLine);
 
-  return function (game, thisObj, targetObj) {
+  return function (game, select, thisObj, targetObj) {
     return lines.map(function (l) {
-      return l(game, thisObj, targetObj);
+      return l(game, select, thisObj, targetObj);
     }).join(' ');
   };
 };
@@ -82,9 +82,9 @@ var parseParagraph = function parseParagraph(paragraph) {
 
 var parsePassage = function parsePassage(passage) {
   var paragraphs = passage.paragraphs.map(parseParagraph);
-  return function (game, thisObj, targetObj) {
+  return function (game, select, thisObj, targetObj) {
     return paragraphs.map(function (p) {
-      return p(game, thisObj, targetObj);
+      return p(game, select, thisObj, targetObj);
     }).join('\n');
   };
 };
