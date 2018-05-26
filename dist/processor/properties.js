@@ -2,6 +2,8 @@
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _selectors = require('../selectors');
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
@@ -37,12 +39,6 @@ var removeItemFromObject = function removeItemFromObject(game, objectId, itemId)
   return setPropertyForObject(game, ['objects', objectId, 'items'], items);
 };
 
-var getPropertyFromObject = function getPropertyFromObject(object, propertyArr) {
-  return propertyArr.reduce(function (acc, prop) {
-    return acc && has(acc, prop) ? acc[prop] : undefined;
-  }, object);
-};
-
 var setPropertyForObject = function setPropertyForObject(object, _ref, value) {
   var _ref2 = _toArray(_ref),
       prop = _ref2[0],
@@ -56,29 +52,10 @@ var setPropertyForObject = function setPropertyForObject(object, _ref, value) {
 };
 
 var getPropsArray = function getPropsArray(id, props, getItems) {
-  return props.length > 0 ? ['objects', id, 'properties'].concat(_toConsumableArray(props)) : getItems ? ['objects', id, 'items'] : ['objects', id, 'id'];
+  return props.length > 0 ? ['objects', id].concat(_toConsumableArray(props)) : getItems ? ['objects', id, 'items'] : ['objects', id, 'id'];
 };
 
 module.exports = {
-  getProperty: function getProperty(_ref3, getItems) {
-    var type = _ref3.type,
-        id = _ref3.id,
-        props = _ref3.props;
-    return function (game, thisObj, targetObj) {
-      var objectLocation = type === '$GAME_OBJECT' ? getPropsArray(id, props, getItems) : type === '$INVENTORY' ? getPropsArray('PLAYER', [], true) : type === '$LOCATION' ? getPropsArray(game.location, props, getItems) : type === '$THIS' ? getPropsArray(thisObj, props, getItems) : type === '$TARGET' ? getPropsArray(targetObj, props, getItems) : [];
-      return getPropertyFromObject(game, objectLocation);
-    };
-  },
-  setProperty: function setProperty(_ref4, value, setItems) {
-    var type = _ref4.type,
-        id = _ref4.id,
-        props = _ref4.props;
-    return function (game, thisObj, targetObj) {
-      // console.log(thisObj);
-      var objectLocation = type === '$GAME_OBJECT' ? getPropsArray(id, props, setItems) : type === '$INVENTORY' ? getPropsArray('PLAYER', [], true) : type === '$LOCATION' ? getPropsArray(game.location, props, setItems) : type === '$THIS' ? getPropsArray(thisObj, props, setItems) : type === '$TARGET' ? getPropsArray(targetObj, props, setItems) : [];
-      return setPropertyForObject(game, objectLocation, value);
-    };
-  },
   addItem: function addItem(object, item) {
     return function (game, thisObj, targetObj) {
       // CUSTOM HANDLING FOR TYPES

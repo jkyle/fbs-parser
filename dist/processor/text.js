@@ -1,7 +1,5 @@
 'use strict';
 
-var _properties = require('./properties');
-
 var _conditionals = require('./conditionals');
 
 var _conditionals2 = _interopRequireDefault(_conditionals);

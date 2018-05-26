@@ -1,8 +1,8 @@
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _properties = require('./properties');
+
+var _selectors = require('../selectors');
 
 var _text = require('./text');
 
@@ -20,19 +20,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+var selectFn = function selectFn(_ref) {
+  var type = _ref.type,
+      id = _ref.id,
+      props = _ref.props;
+  return function (state, thisObj, targetObj) {
+    var objectLocation = type === '$GAME_OBJECT' ? [id].concat(_toConsumableArray(props)) : type === '$THIS' ? [thisObj].concat(_toConsumableArray(props)) : type === '$TARGET' ? [targetObj].concat(_toConsumableArray(props)) : [type].concat(_toConsumableArray(props));
+    return (0, _selectors.select)(objectLocation, state);
+  };
+};
+
 var processSet = function processSet(action) {
   var valueFn = (0, _expressions2.default)(action.value);
+  var selected = selectFn(action.target);
   return function (game, thisObj, targetObj) {
     var value = valueFn(game, thisObj, targetObj);
-    var setFn = (0, _properties.setProperty)(action.target, value);
-    return setFn(game, thisObj, targetObj);
+    return selected(game, thisObj, targetObj).set(value);
   };
 };
 
 var processSay = function processSay(action) {
   var sayFn = (0, _text2.default)(action.passage);
   return function (game, thisObj, targetObj) {
-    return _extends({}, game, { buffer: [sayFn(game, thisObj, targetObj)].concat(_toConsumableArray(game.buffer)) });
+    return (0, _selectors.select)('$BUFFER', game).add(sayFn(game, thisObj, targetObj));
   };
 };
 

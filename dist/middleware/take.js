@@ -16,7 +16,8 @@ exports.default = function (next, select) {
         return select('$BUFFER', state).add('There\'s no ' + subject + ' here.');
       }
 
-      var takeable = select([subject, 'properties', 'takeable'], state).get();
+      var takeable = select([subject, 'takeable'], state).get();
+      console.log('takeable', takeable);
       if (!takeable) {
         return select('$BUFFER', state).add('You can\'t take ' + subject + '.');
       }
