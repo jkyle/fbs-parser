@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.processFBS = undefined;
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _commander = require('commander');
@@ -34,8 +39,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var fs = _bluebird2.default.promisifyAll(_fs3.default);
-var dir = process.cwd();
-_commander2.default.version('0.0.1').option('-i, --input [dir]', 'Input directory').option('-o, --output [dir]', 'Output directory').parse(process.argv);
 
 var readDir = function readDir(dir) {
   return fs.readdirAsync(dir).then(function (items) {
@@ -82,21 +85,15 @@ var buildState = function buildState(definition) {
   }).reduce(function (acc, item) {
     return _extends({}, acc, _defineProperty({}, item.id, { id: item.id, type: item.type, properties: {}, items: [], exits: [] }));
   }, {});
-  var exe = definition.reduce(function (acc, item) {
+  var program = definition.reduce(function (acc, item) {
     return _extends({}, acc, _defineProperty({}, item.id, { events: item.events, props: item.props }));
   }, {});
 
   state.objects = stateObjects;
 
-  return { state: state, exe: exe };
+  return { state: state, program: program };
 };
 
-var writeFiles = function writeFiles(state, exe) {
-  return _bluebird2.default.all([fs.writeFileAsync(_path2.default.resolve(dir + '/' + (_commander2.default.output || 'build') + '/state.json'), JSON.stringify(state)), fs.writeFileAsync(_path2.default.resolve(dir + '/' + (_commander2.default.output || 'build') + '/program.json'), JSON.stringify(exe))]);
+var processFBS = exports.processFBS = function processFBS(dir) {
+  return readDir(dir).then(flatten).then(parseFiles).then(buildState);
 };
-
-readDir(_path2.default.resolve(dir + '/' + (_commander2.default.input || 'game-objects'))).then(flatten).then(parseFiles).then(buildState).then(function (_ref2) {
-  var state = _ref2.state,
-      exe = _ref2.exe;
-  return writeFiles(state, exe);
-});

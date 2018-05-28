@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel lib/bin --out-dir bin && babel lib/src --out-dir dist",
+    "build": "babel lib/bin --out-dir bin",
     "compile": "nearleyc lib/grammars/fbs.ne -o lib/bin/fbs-grammar.js",
     "short": "npm run compile && npm run build",
     "test": "echo \"lol\" && exit 1"
   },
   "bin": {
-    "fbs": "bin/fbs.js"
+    "fbs": "bin/fbs-cli.js"
   },
   "main": "dist/index.js",
   "keywords": [],
