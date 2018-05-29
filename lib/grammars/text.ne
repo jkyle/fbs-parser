@@ -39,4 +39,4 @@ conditional_end -> "{x}" {% id %}
 condition_else -> "{~}" {% id %}
 
 object_property -> "{@" _ expression __ "}" {% d => d[2] %}
-								 | "{@" _ "RAW$TARGET" __ "}" {% d => ({ type: 'RAW_TARGET' }) %}
+								 | "{@" _ "$INPUT" __ "}" {% d => ({ type: 'INPUT' }) %}

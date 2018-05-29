@@ -15,7 +15,7 @@ game_object_or_primative -> game_object {% id %}
 
 expression_or_primative -> expression {% id %}
   											 | primative_no_num {% id %}
-												 | "RAW$TARGET" {% d => ({type: 'RAW_TARGET'}) %}
+												 | "$INPUT" {% d => ({type: 'INPUT'}) %}
 
 
 #operators
