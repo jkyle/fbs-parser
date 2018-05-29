@@ -262,7 +262,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 return d.join('');
             } }, { "name": "action", "symbols": [{ "literal": "-" }, "_", "action$ebnf$1", "__", "action$string$1", "passage", "action$string$2"], "postprocess": function postprocess(d) {
                 return { type: "say", passage: d[5] };
-            } }, { "name": "game_object_or_primative", "symbols": ["game_object"], "postprocess": id }, { "name": "game_object_or_primative", "symbols": ["primative"], "postprocess": id }, { "name": "expression_or_primative", "symbols": ["expression"], "postprocess": id }, { "name": "expression_or_primative", "symbols": ["primative_no_num"], "postprocess": id }, { "name": "operator$subexpression$1", "symbols": ["add"] }, { "name": "operator$subexpression$1", "symbols": ["remove"] }, { "name": "operator$subexpression$1", "symbols": ["set"] }, { "name": "operator", "symbols": ["operator$subexpression$1"], "postprocess": function postprocess(d) {
+            } }, { "name": "game_object_or_primative", "symbols": ["game_object"], "postprocess": id }, { "name": "game_object_or_primative", "symbols": ["primative"], "postprocess": id }, { "name": "expression_or_primative", "symbols": ["expression"], "postprocess": id }, { "name": "expression_or_primative", "symbols": ["primative_no_num"], "postprocess": id }, { "name": "expression_or_primative$string$1", "symbols": [{ "literal": "R" }, { "literal": "A" }, { "literal": "W" }, { "literal": "$" }, { "literal": "T" }, { "literal": "A" }, { "literal": "R" }, { "literal": "G" }, { "literal": "E" }, { "literal": "T" }], "postprocess": function joiner(d) {
+                return d.join('');
+            } }, { "name": "expression_or_primative", "symbols": ["expression_or_primative$string$1"], "postprocess": function postprocess(d) {
+                return { type: 'RAW_TARGET' };
+            } }, { "name": "operator$subexpression$1", "symbols": ["add"] }, { "name": "operator$subexpression$1", "symbols": ["remove"] }, { "name": "operator$subexpression$1", "symbols": ["set"] }, { "name": "operator", "symbols": ["operator$subexpression$1"], "postprocess": function postprocess(d) {
                 return d[0][0];
             } }, { "name": "add$string$1", "symbols": [{ "literal": "a" }, { "literal": "d" }, { "literal": "d" }], "postprocess": function joiner(d) {
                 return d.join('');
