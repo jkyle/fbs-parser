@@ -7,8 +7,8 @@ files -> file:+
 file -> fileType " " fileName ("\n"):+ computed_props ("\n"):+  events ("\n"):*
     {% d => ({ type: d[0], id: d[2], props: d[4], events: d[6] }) %}
 
-fileType -> "@" ("ITEM" | "LOCATION" | "CHARACTER" | "PLAYER" | "GLOBAL")
-	{% d => d[1][0] %}
+fileType -> "@" [A-Z]:+
+	{% d => d[1].join('') %}
 
 fileName -> [A-Z]:+ (" " [A-Z]:+):*
 	{% d => [d[0].join(''), ...d[1].map(e => e[1].join(''))].join(' ') %}
